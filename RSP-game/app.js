@@ -72,6 +72,7 @@ function beginGame() {
       game.comp.imgDefault();
       game.btnStart();
     }, 2000);
+
   } else if (game.player.choice === 2 && game.comp.choice === 2) {
 
     game.player.imgScissors();
