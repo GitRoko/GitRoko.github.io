@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap"
+    rel="stylesheet">
+
+  <title>RSP-Game</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row score">
+      <div class="score-title">
+        <div class="title">
+          <h1>Rochambeau</h1>
+        </div>
+      </div>
+      <div class="score-body">
+        <div class="player-name">
+          Player
+        </div>
+        <div class="scoreboard">
+          <div class="player-score">0</div>
+          <span class="divider">:</span>
+          <div class="comp-score">0</div>
+        </div>
+        <div class="comp-name">
+          COMP
+        </div>
+      </div>
+    </div>
+    <div class="row gesture">
+      <span class='vs'>VS</span>
+      <div class="screen">
+        <div class="player-gesture shake-left">
+          <img class="player-img" src="/img/rock-left@0.33x.png" alt="">
+        </div>
+
+        <div class="comp-gesture shake-right">
+          <img class="comp-img" src="/img/rock-right@0.33x.png" alt="">
+        </div>
+      </div>
+
+    </div>
+    <div class="row choice">
+      <div>
+        <button class="start">START!</button>
+      </div>
+      <div class="choice-body">
+
+        <button class="rock">Rock</button>
+        <button class="scissors">Scissors</button>
+        <button class="paper">Paper</button>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>

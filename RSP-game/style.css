@@ -1,0 +1,178 @@
+body {
+  background-color: rgba(255, 217, 1, 0.486);
+  font-family: 'Londrina Solid';
+  font-size: 16px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+.container {
+  margin: auto;
+  max-width: 400px;
+}
+.row {
+  border: 5px solid #000;
+  border-radius: 10px;
+  background-color: rgb(71, 197, 187);
+  margin-bottom: 20px;
+  padding: 10px 10px;
+}
+.row h1 {
+  margin: 0 0 8px 0;
+  padding: 0;
+  letter-spacing: 5px;
+  font-size: 48px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 10px rgb(0, 0, 0);
+  
+}
+.row.score {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid #000;
+  border-radius: 10px;
+}
+.score-body {
+  display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.player-name, .comp-name {
+  font-size: 32px;
+}
+.scoreboard {
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.scoreboard .player-score, .scoreboard .comp-score {
+  padding: 10px 10px;
+  border: 5px solid #000;
+  border-radius: 10px;
+  margin: 5px 10px;
+  background-color: #fff;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+}
+.scoreboard .divider {
+  align-self: center;
+  font-size: 42px;
+}
+.row.gesture {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-evenly;
+    position: relative;
+}
+.vs {
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 38px;
+}
+.screen {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+}
+.screen {
+  width: 100%;
+  height: 150px;
+  margin: 20px 0px;
+}
+.player-gesture, .comp-gesture {
+  
+}
+.player-gesture.shake-left {
+   animation: shake-player 2s;
+   animation-iteration-count: infinite;
+}
+
+@keyframes shake-player {
+  0% { transform: translate(0px, 0px) rotate(0deg); }
+  10% { transform: translate(0px, 0px) rotate(10deg); }
+  20% { transform: translate(0px, 0px) rotate(-10deg); }
+ 
+  40% { transform: translate(0px, 0px) rotate(10deg); }
+  50% { transform: translate(0px, 0px) rotate(-10deg); }
+ 
+  70% { transform: translate(0px, 0px) rotate(10deg); }
+  80% { transform: translate(0px, 0px) rotate(-10deg); }
+ 
+  100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+.comp-gesture.shake-right {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake-comp 2s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake-comp {
+ 0% { transform: translate(0px, 0px) rotate(0deg); }
+ 10% { transform: translate(0px, 0px) rotate(-10deg); }
+ 20% { transform: translate(0px, 0px) rotate(10deg); }
+
+ 40% { transform: translate(0px, 0px) rotate(-10deg); }
+ 50% { transform: translate(0px, 0px) rotate(10deg); }
+
+ 70% { transform: translate(0px, 0px) rotate(-10deg); }
+ 80% { transform: translate(0px, 0px) rotate(10deg); }
+
+ 100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+.row.choice .start {
+  font-family: 'Londrina Solid';
+  font-size: 32px;
+  font-weight: 400;
+  padding: 15px 15px;
+  border: 5px solid #000;
+  border-radius: 10px;
+  margin: 0 auto 30px;
+  background-color: orange;
+  width: 180px;
+}
+.row.choice {
+  display: flex;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+}
+.row.choice .choice-body {
+  display: flex;
+}
+.row.choice button {
+  font-family: 'Londrina Solid';
+  font-size: 24px;
+  font-weight: 400;
+  padding: 5px 2px;
+  border: 5px solid #000;
+  border-radius: 10px;
+  width: 100px;
+  margin: 0 7px;
+}
+.row.choice button.active {
+  background-color: mediumseagreen;
+}
+
