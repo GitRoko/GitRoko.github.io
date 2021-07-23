@@ -15,20 +15,20 @@ const game = {
     score: document.querySelector('.player-score'),
     choice: 1,
     count: 0,
-    imgDefault() { game.player.gesture.src = '/img/rock-left@0.25x.png' },
-    imgRock() { game.player.gesture.src = '/img/rock-left@0.33x.png' },
-    imgScissors() { game.player.gesture.src = '/img/scissors-left@0.33x.png' },
-    imgPaper() { game.player.gesture.src = '/img/paper-left@0.33x.png' }
+    imgDefault() { game.player.gesture.src = '/RSP-game/img/rock-left@0.25x.png' },
+    imgRock() { game.player.gesture.src = '/RSP-game/img/rock-left@0.33x.png' },
+    imgScissors() { game.player.gesture.src = '/RSP-game/img/scissors-left@0.33x.png' },
+    imgPaper() { game.player.gesture.src = '/RSP-game/img/paper-left@0.33x.png' }
   },
   comp: {
     gesture: document.querySelector('.comp-img'),
     score: document.querySelector('.comp-score'),
     choice: 1,
     count: 0,
-    imgDefault() { game.comp.gesture.src = '/img/rock-right@0.25x.png' },
-    imgRock() { game.comp.gesture.src = '/img/rock-right@0.33x.png' },
-    imgScissors() { game.comp.gesture.src = '/img/scissors-right@0.33x.png' },
-    imgPaper() { game.comp.gesture.src = '/img/paper-right@0.33x.png' }
+    imgDefault() { game.comp.gesture.src = '/RSP-game/img/rock-right@0.25x.png' },
+    imgRock() { game.comp.gesture.src = '/RSP-game/img/rock-right@0.33x.png' },
+    imgScissors() { game.comp.gesture.src = '/RSP-game/img/scissors-right@0.33x.png' },
+    imgPaper() { game.comp.gesture.src = '/RSP-game/img/paper-right@0.33x.png' }
   },
 
 }
