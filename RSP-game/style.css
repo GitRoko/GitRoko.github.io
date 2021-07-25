@@ -176,12 +176,12 @@ body {
   transition: all 250ms;
 }
 .row.choice button:active {
-  transform: translateY(1px);
-  filter: saturate(150%);
+  transform: translateY(2px);
+  
 }
 .row.choice button:hover {
-  transform: translateY(1px);
-  filter: saturate(150%);
+  transform: translateY(2px);
+  
 }
 .row.choice button.active {
   background-color: mediumseagreen;
