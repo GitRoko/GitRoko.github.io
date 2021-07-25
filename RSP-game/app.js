@@ -8,20 +8,20 @@ const game = {
 
   result: document.querySelector('.vs'),
 
-  showPush() { game.result.textContent = 'PUSH!' },
-  showWin() { game.result.textContent = 'You WIN!' },
-  showLose() { game.result.textContent = 'You LOSE!' },
-  showDraw() { game.result.textContent = 'DRAW!' },
+  showPush() { this.result.textContent = 'PUSH!' },
+  showWin() { this.result.textContent = 'You WIN!' },
+  showLose() { this.result.textContent = 'You LOSE!' },
+  showDraw() { this.result.textContent = 'DRAW!' },
 
   player: {
     gesture: document.querySelector('.player-img'),
     score: document.querySelector('.player-score'),
     choice: 1,
     count: 0,
-    imgDefault() { game.player.gesture.src = '/RSP-game/img/rock-left@0.25x.png' },
-    imgRock() { game.player.gesture.src = '/RSP-game/img/rock-left@0.33x.png' },
-    imgScissors() { game.player.gesture.src = '/RSP-game/img/scissors-left@0.33x.png' },
-    imgPaper() { game.player.gesture.src = '/RSP-game/img/paper-left@0.33x.png' }
+    imgDefault() { this.gesture.src = '/RSP-game/img/rock-left@0.25x.png' },
+    imgRock() { this.gesture.src = '/RSP-game/img/rock-left@0.33x.png' },
+    imgScissors() { this.gesture.src = '/RSP-game/img/scissors-left@0.33x.png' },
+    imgPaper() { this.gesture.src = '/RSP-game/img/paper-left@0.33x.png' }
   },
 
   comp: {
@@ -29,16 +29,16 @@ const game = {
     score: document.querySelector('.comp-score'),
     choice: 1,
     count: 0,
-    imgDefault() { game.comp.gesture.src = '/RSP-game/img/rock-right@0.25x.png' },
-    imgRock() { game.comp.gesture.src = '/RSP-game/img/rock-right@0.33x.png' },
-    imgScissors() { game.comp.gesture.src = '/RSP-game/img/scissors-right@0.33x.png' },
-    imgPaper() { game.comp.gesture.src = '/RSP-game/img/paper-right@0.33x.png' }
+    imgDefault() { this.gesture.src = '/RSP-game/img/rock-right@0.25x.png' },
+    imgRock() { this.gesture.src = '/RSP-game/img/rock-right@0.33x.png' },
+    imgScissors() { this.gesture.src = '/RSP-game/img/scissors-right@0.33x.png' },
+    imgPaper() { this.gesture.src = '/RSP-game/img/paper-right@0.33x.png' }
   },
 
   setDefault() {
-    game.player.imgDefault();
-    game.comp.imgDefault();
-    game.showPush();
+    this.player.imgDefault();
+    this.comp.imgDefault();
+    this.showPush();
   }
 }
 
@@ -100,27 +100,6 @@ function beginGame() {
 
     setTimeout(() => { game.setDefault() }, 2000);
 
-
-  } else if (game.player.choice === 1 && game.comp.choice === 3) {
-
-    game.comp.count += 1;
-    game.comp.score.textContent = game.comp.count;
-    game.player.imgRock();
-    game.comp.imgPaper();
-    game.showLose();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
-  } else if (game.player.choice === 2 && game.comp.choice === 1) {
-
-    game.comp.count += 1;
-    game.comp.score.textContent = game.comp.count;
-    game.player.imgScissors();
-    game.comp.imgRock();
-    game.showLose();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
   } else if (game.player.choice === 2 && game.comp.choice === 3) {
 
     game.player.count += 1;
@@ -147,6 +126,26 @@ function beginGame() {
     game.comp.score.textContent = game.comp.count;
     game.player.imgPaper();
     game.comp.imgScissors();
+    game.showLose();
+
+    setTimeout(() => { game.setDefault() }, 2000);
+
+  } else if (game.player.choice === 1 && game.comp.choice === 3) {
+
+    game.comp.count += 1;
+    game.comp.score.textContent = game.comp.count;
+    game.player.imgRock();
+    game.comp.imgPaper();
+    game.showLose();
+
+    setTimeout(() => { game.setDefault() }, 2000);
+
+  } else if (game.player.choice === 2 && game.comp.choice === 1) {
+
+    game.comp.count += 1;
+    game.comp.score.textContent = game.comp.count;
+    game.player.imgScissors();
+    game.comp.imgRock();
     game.showLose();
 
     setTimeout(() => { game.setDefault() }, 2000);
