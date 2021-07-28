@@ -1,3 +1,11 @@
+const Choices = object.freeze(){
+  ROCK: 1,
+  SCISSORS: 2,
+  PAPER: 3
+};
+
+
+
 const game = {
   button: {
     rock: document.querySelector('.rock'),
@@ -65,90 +73,58 @@ function addChoice() {
 
 function beginGame() {
   game.comp.choice = Math.floor(Math.random() * 3) + 1;
+  handleChoice(game.player.choice, game.comp.choice);
+}
 
-  if (game.player.choice === 1 && game.comp.choice === 1) {
+function handleChoice(playerChoice, compChoice) {
+  this.handlePlayerChoice(playerChoice, game.player);
+  this.handlePlayerChoice(compChoice, game.comp);
 
-    game.player.imgRock();
-    game.comp.imgRock();
-    game.showDraw();
+  this.defineWinner(playerChoice, compChoice);
 
-    setTimeout(() => { game.setDefault() }, 2000);
+  setTimeout(() => { game.setDefault() }, 2000);
+}
 
-  } else if (game.player.choice === 2 && game.comp.choice === 2) {
+function handlePlayerChoice(choice, player) {
+  if (choice <= 0 || !player)
+    return;
 
-    game.player.imgScissors();
-    game.comp.imgScissors();
-    game.showDraw();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
-  } else if (game.player.choice === 3 && game.comp.choice === 3) {
-
-    game.player.imgPaper();
-    game.comp.imgPaper();
-    game.showDraw();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
-  } else if (game.player.choice === 1 && game.comp.choice === 2) {
-
-    game.player.count += 1;
-    game.player.score.textContent = game.player.count;
-    game.player.imgRock();
-    game.comp.imgScissors();
-    game.showWin();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
-  } else if (game.player.choice === 2 && game.comp.choice === 3) {
-
-    game.player.count += 1;
-    game.player.score.textContent = game.player.count;
-    game.player.imgScissors();
-    game.comp.imgPaper();
-    game.showWin();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
-  } else if (game.player.choice === 3 && game.comp.choice === 1) {
-
-    game.player.count += 1;
-    game.player.score.textContent = game.player.count;
-    game.player.imgPaper();
-    game.comp.imgRock();
-    game.showWin();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
-  } else if (game.player.choice === 3 && game.comp.choice === 2) {
-
-    game.comp.count += 1;
-    game.comp.score.textContent = game.comp.count;
-    game.player.imgPaper();
-    game.comp.imgScissors();
-    game.showLose();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
-  } else if (game.player.choice === 1 && game.comp.choice === 3) {
-
-    game.comp.count += 1;
-    game.comp.score.textContent = game.comp.count;
-    game.player.imgRock();
-    game.comp.imgPaper();
-    game.showLose();
-
-    setTimeout(() => { game.setDefault() }, 2000);
-
-  } else if (game.player.choice === 2 && game.comp.choice === 1) {
-
-    game.comp.count += 1;
-    game.comp.score.textContent = game.comp.count;
-    game.player.imgScissors();
-    game.comp.imgRock();
-    game.showLose();
-
-    setTimeout(() => { game.setDefault() }, 2000);
+  switch (choice) {
+    case 1: {
+      player.imgRock();
+      break;
+    }
+    case 2: {
+      player.imgScissors();
+      break;
+    }
+    case 3: {
+      player.imgPaper();
+      break;
+    }
+    default: {
+      player.imgDefault();
+      break;
+    }
   }
 }
 
+function defineWinner(playerChoice, compChoice) {
+  if (playerChoice === compChoice) {
+    game.showDraw();
+    return;
+  }
+
+  if (playerChoice === 1 && compChoice === 2 ||
+    playerChoice === 2 && compChoice === 3 ||
+    playerChoice === 3 && compChoice === 1) {
+    game.player.count += 1;
+    game.player.score.textContent = game.player.count;
+    game.showWin();
+    return;
+  }
+
+  game.comp.count += 1;
+  game.comp.score.textContent = game.comp.count;
+  game.showLose();
+}
