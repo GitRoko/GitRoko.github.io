@@ -1,8 +1,8 @@
-const Choices = object.freeze(){
-  ROCK: 1,
-  SCISSORS: 2,
-  PAPER: 3
-};
+// const Choices = object.freeze(){
+//   ROCK: 1,
+//   SCISSORS: 2,
+//   PAPER: 3
+// };
 
 
 
@@ -66,9 +66,8 @@ function addChoice() {
     }
   }
 
-  (this.classList.contains('rock')) ? game.player.choice = 1 :
-    (this.classList.contains('scissors')) ? game.player.choice = 2 :
-      game.player.choice = 3;
+  game.player.choice = (this.classList.contains('rock')) ? 1 :
+    (this.classList.contains('scissors')) ? 2 : 3;
 }
 
 function beginGame() {
@@ -118,13 +117,12 @@ function defineWinner(playerChoice, compChoice) {
   if (playerChoice === 1 && compChoice === 2 ||
     playerChoice === 2 && compChoice === 3 ||
     playerChoice === 3 && compChoice === 1) {
-    game.player.count += 1;
-    game.player.score.textContent = game.player.count;
+
+    game.player.score.textContent = game.player.count += 1;
     game.showWin();
     return;
   }
 
-  game.comp.count += 1;
-  game.comp.score.textContent = game.comp.count;
+  game.comp.score.textContent = game.comp.count += 1;
   game.showLose();
 }
