@@ -1,0 +1,107 @@
+body {
+    font-size: 18px;
+    font-family: sans-serif;
+    color: #ECEFF1;
+    background-color: #000;
+}
+.container {
+    width: 100%;
+    margin: 30px auto;
+    background-color: #3d3e41;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.cal {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+}
+.cal ul {
+    list-style: none;
+    margin: 0;
+    padding: 15px 15px;
+}
+.cal-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 1px solid rgb(201, 199, 199);
+}
+.btn-prev, .btn-next {
+    margin: 0 5px;
+    padding: 0;
+    height: 1.2em;
+    width: 1.2em;
+    font-size: 1.2em;
+    background-color: transparent;
+    color: #ECEFF1;
+    border: none;
+}
+.btn-prev:hover, .btn-next:hover {
+    cursor: pointer;
+}
+.cal-header-month, .cal-header-year, .btn {
+    padding: 5px;
+}
+.select-month, .select-year {
+    font-size: 1em;
+    font-family: sans-serif;
+    color: #ECEFF1;
+    background-color: #3d3e41;
+    border: none;
+    appearance: none;
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+    text-align-last:center;
+    width: 100%;
+}
+
+.cal-week-days, .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+    font-weight: bold;
+
+}
+.cal-week-days {
+    border-bottom: 1px solid rgb(201, 199, 199);
+}
+.cal-week-day, .cal-day, .cal-day a{
+    width: 2.5em;
+    height: 2.5em;
+    text-align: center;
+    line-height: 2.5em;
+}
+.cal-day.cal-day--not-in-month > a{
+    color: #696969;
+}
+.cal-day a {
+    font-size: 18px;
+    font-family: sans-serif;
+    color: #ECEFF1;
+    text-decoration: none;
+    display: block;
+}
+.cal-day a:hover {
+    border-radius: 50%;
+    background-color: rgb(223, 57, 57);
+    color: rgb(29, 28, 28);
+}
+.now-day {
+    border-radius: 50%;
+    background-color: rgb(223, 57, 57);
+    color: rgb(29, 28, 28);
+}
