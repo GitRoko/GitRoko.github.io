@@ -95,11 +95,16 @@ body {
     text-decoration: none;
     display: block;
 }
-.cal-day a:hover {
+.cal-day a.active-day {
     border-radius: 50%;
-    background-color: rgb(223, 57, 57);
-    color: rgb(29, 28, 28);
+    background-color: #ECEFF1;
+    color: #696969;
 }
+/*.cal-day a:hover {*/
+/*    border-radius: 50%;*/
+/*    background-color: #ECEFF1;*/
+/*    color: rgb(29, 28, 28);*/
+/*}*/
 .now-day {
     border-radius: 50%;
     background-color: rgb(223, 57, 57);
