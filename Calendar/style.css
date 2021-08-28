@@ -3,26 +3,194 @@ body {
     font-family: sans-serif;
     color: #ECEFF1;
     background-color: #000;
+    box-sizing: border-box;
 }
+
 .container {
     width: 100%;
     margin: 30px auto;
-    background-color: #3d3e41;
-    max-width: 500px;
-    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+
 }
+
+.schedule {
+
+}
+
+.schedule-timeBlocks {
+    list-style: none;
+    margin: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 50px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.schedule-timeBlock {
+    height: 40px;
+    border-top: #3d3e41 solid 1px;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+    align-self: stretch;
+    position: relative;
+}
+
+li.timeline {
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid rgb(223, 57, 57);
+    color: rgb(223, 57, 57);
+    position: relative;
+    width: 100%;
+}
+
+li.timeline::before {
+    content: '00:00';
+    font-size: 1em;
+    font-weight: 600;
+    position: absolute;
+    top: -18px;
+    left: 0;
+}
+
+li.schedule-timeBlock:last-child {
+    border-bottom: #3d3e41 solid 1px;
+}
+
+li.schedule-timeBlock::before {
+    color: #696969;
+    font-size: 1em;
+    position: absolute;
+    top: -9px;
+    left: -50px;
+}
+
+li.schedule-timeBlock:nth-child(2)::before {
+    content: '00:00';
+}
+
+li.schedule-timeBlock:nth-child(3)::before {
+    content: '01:00';
+}
+
+li.schedule-timeBlock:nth-child(4)::before {
+    content: '02:00';
+}
+
+li.schedule-timeBlock:nth-child(5)::before {
+    content: '03:00';
+}
+
+li.schedule-timeBlock:nth-child(6)::before {
+    content: '04:00';
+}
+
+li.schedule-timeBlock:nth-child(7)::before {
+    content: '05:00';
+}
+
+li.schedule-timeBlock:nth-child(8)::before {
+    content: '06:00';
+}
+
+li.schedule-timeBlock:nth-child(9)::before {
+    content: '07:00';
+}
+
+li.schedule-timeBlock:nth-child(10)::before {
+    content: '08:00';
+}
+
+li.schedule-timeBlock:nth-child(11)::before {
+    content: '09:00';
+}
+
+li.schedule-timeBlock:nth-child(12)::before {
+    content: '10:00';
+}
+
+li.schedule-timeBlock:nth-child(13)::before {
+    content: '11:00';
+}
+
+li.schedule-timeBlock:nth-child(14)::before {
+    content: '12:00';
+}
+
+li.schedule-timeBlock:nth-child(15)::before {
+    content: '13:00';
+}
+
+li.schedule-timeBlock:nth-child(16)::before {
+    content: '14:00';
+}
+
+li.schedule-timeBlock:nth-child(17)::before {
+    content: '15:00';
+}
+
+li.schedule-timeBlock:nth-child(18)::before {
+    content: '16:00';
+}
+
+li.schedule-timeBlock:nth-child(19)::before {
+    content: '17:00';
+}
+
+li.schedule-timeBlock:nth-child(20)::before {
+    content: '18:00';
+}
+
+li.schedule-timeBlock:nth-child(21)::before {
+    content: '19:00';
+}
+
+li.schedule-timeBlock:nth-child(22)::before {
+    content: '20:00';
+}
+
+li.schedule-timeBlock:nth-child(23)::before {
+    content: '21:00';
+}
+
+li.schedule-timeBlock:nth-child(24)::before {
+    content: '22:00';
+}
+
+li.schedule-timeBlock:nth-child(25)::before {
+    content: '23:00';
+}
+
 
 .cal {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-content: stretch;
+    max-width: 400px;
+    border-radius: 10px;
+    background-color: #3d3e41;
+    padding-right: 15px;
+    padding-left: 15px;
 }
+
 .cal ul {
     list-style: none;
     margin: 0;
     padding: 15px 15px;
 }
+
+.cal .cal-week-days {
+    padding: 8px 15px;
+}
+
 .cal-header {
     display: flex;
     flex-direction: row;
@@ -61,10 +229,13 @@ body {
     box-sizing: content-box;
     margin: 0;
     padding: 0;
-    text-align-last:center;
+    text-align-last: center;
     width: 100%;
 }
 
+/*.select-month option, .select-year  option{*/
+/*    padding: 5px;*/
+/*}*/
 .cal-week-days, .cal-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -76,18 +247,30 @@ body {
     font-weight: bold;
 
 }
+
+.cal-days {
+    border-bottom: 1px solid rgb(201, 199, 199);
+}
+
 .cal-week-days {
     border-bottom: 1px solid rgb(201, 199, 199);
 }
-.cal-week-day, .cal-day, .cal-day a{
+
+.cal-week-day, .cal-day, .cal-day a {
     width: 2.5em;
     height: 2.5em;
     text-align: center;
     line-height: 2.5em;
 }
-.cal-day.cal-day--not-in-month > a{
+
+.cal-day.cal-day--not-in-month > a {
     color: #696969;
 }
+
+.cal-day {
+    margin: 5px 0;
+}
+
 .cal-day a {
     font-size: 18px;
     font-family: sans-serif;
@@ -95,6 +278,7 @@ body {
     text-decoration: none;
     display: block;
 }
+
 .cal-day a.active-day {
     border-radius: 50%;
     background-color: #ECEFF1;

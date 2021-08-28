@@ -7,31 +7,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    <script src="schedule.js" type="module"></script>
+    <script src="calendar.js" type="module"></script>
+    <script src="app.js" type="module"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="cal">
-            <ul class="cal-header">
-                <li class="btn">
-                    <button class="btn-prev">&#60</button>
-                </li>
-                <li class="cal-header-month">
-                    <select class="select-month" name="month">
-                        <option value="1">Январь</option>
-                        <option value="2">Февраль</option>
-                        <option value="3">Март</option>
-                        <option value="4">Апрель</option>
-                        <option value="5">Май</option>
-                        <option value="6">Июнь</option>
-                        <option value="7">Июль</option>
-                        <option value="8" selected>Август</option>
-                        <option value="9">Сентябрь</option>
-                        <option value="10">Октябрь</option>
-                        <option value="11">Ноябрь</option>
-                        <option value="12">Декабрь</option>
-                    </select>
+<div class="container">
+    <div class="schedule">
+        <ul class="schedule-timeBlocks">
+            <li class="timeline"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+            <li class="schedule-timeBlock"></li>
+        </ul>
+    </div>
+    <div class="cal">
+        <ul class="cal-header">
+            <li class="btn">
+                <button class="btn-prev">&#60</button>
+            </li>
+            <li class="cal-header-month">
+                <select class="select-month" name="month">
+                    <option value="1">Январь</option>
+                    <option value="2">Февраль</option>
+                    <option value="3">Март</option>
+                    <option value="4">Апрель</option>
+                    <option value="5">Май</option>
+                    <option value="6">Июнь</option>
+                    <option value="7">Июль</option>
+                    <option value="8" selected>Август</option>
+                    <option value="9">Сентябрь</option>
+                    <option value="10">Октябрь</option>
+                    <option value="11">Ноябрь</option>
+                    <option value="12">Декабрь</option>
+                </select>
                 </li>
                 <li class="cal-header-year">
                     <select class="select-year" name="year">
