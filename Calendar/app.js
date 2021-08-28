@@ -25,7 +25,7 @@ const YEAR_LIST = function (fromYear, toYear) {
 }(1970, 2050);
 
 const calendar = new Calendar(document.querySelector('.cal'), [...MONTH_LIST], [...YEAR_LIST]);
-const schedule = new Schedule();
+const schedule = new Schedule(document.querySelector('.schedule'));
 
 console.log(calendar);
 console.log(schedule);
