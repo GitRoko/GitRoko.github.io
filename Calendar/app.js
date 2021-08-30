@@ -25,11 +25,22 @@ const YEAR_LIST = function (fromYear, toYear) {
     return genArrYear;
 }(1970, 2050);
 
-const calendar = new Calendar(document.querySelector('.cal'), [...MONTH_LIST], [...YEAR_LIST]);
+function onSetActiveDay(state) {
+    console.log(state?.selectedDate);
+}
+
+const calendar = new Calendar(
+    document.querySelector('.cal'),
+    [...MONTH_LIST],
+    [...YEAR_LIST],
+    onSetActiveDay);
+
 const schedule = new Schedule(document.querySelector('.schedule'));
 const timeLine = new TimeLineInSchedule(document.querySelector('.schedule'));
 
+calendar.render();
 timeLine.init();
+
 
 console.log(calendar);
 console.log(schedule);

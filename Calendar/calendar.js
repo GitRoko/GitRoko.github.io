@@ -1,5 +1,5 @@
 export default class Calendar {
-    constructor(rootEl, monthList, yearList) {
+    constructor(rootEl, monthList, yearList, onSetActiveDay) {
 
         this.yearList = yearList;
         this.monthList = monthList;
@@ -12,20 +12,21 @@ export default class Calendar {
 
         const currentDay = new Date();
         this.state = this.getMonthState(currentDay.getFullYear(), currentDay.getMonth());
-        this.render();
 
         this.prevBtn.addEventListener('click', this.prevMonth.bind(this));
         this.nextBtn.addEventListener('click', this.nextMonth.bind(this));
         this.selectMonth.addEventListener('change', this.getSelectedMonth.bind(this));
         this.selectYear.addEventListener('change', this.getSelectedYear.bind(this));
         this.daysList.addEventListener('click', this.setActiveDay.bind(this));
+
+        this.onSetActiveDay = onSetActiveDay;
     }
 
 
     compareDatesWithoutTime(date1, date2) {
         return date1.getDate() === date2.getDate() &&
             date1.getMonth() === date2.getMonth() &&
-            date1.getFullYear() == date2.getFullYear();
+            date1.getFullYear() === date2.getFullYear();
     }
 
     createDay(year, month, day) {
@@ -105,8 +106,12 @@ export default class Calendar {
         const selectedDate = new Date(selectedDayEl.getAttribute('aria-label'));
 
         this.updateState(selectedDate);
+        if (this.onSetActiveDay) {
+            this.onSetActiveDay(this.state);
+        }
 
     }
+
 
     updateState(selectedDate) {
         this.state.selectedDate = selectedDate;
@@ -124,8 +129,8 @@ export default class Calendar {
         if (day.getMonth() !== this.state.month) {
             rootEl.classList.add('cal-day--not-in-month');
         }
-        // l.href = `?day=${day.toJSON().split('T')[0]}`;
-        l.href = `?day=${day.toLocaleDateString().split('.').reverse().join('-')}`;
+        l.href = `?day=${day.toJSON().split('T')[0]}`;
+        // l.href = `?day=${day.toLocaleDateString().split('/').reverse().join('-')}`;
         l.innerText = day.getDate();
         l.setAttribute('aria-label', day.toDateString());
         l.classList.add('cal-dayLink');
