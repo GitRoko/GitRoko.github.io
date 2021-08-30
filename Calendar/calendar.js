@@ -19,11 +19,6 @@ export default class Calendar {
         this.selectMonth.addEventListener('change', this.getSelectedMonth.bind(this));
         this.selectYear.addEventListener('change', this.getSelectedYear.bind(this));
         this.daysList.addEventListener('click', this.setActiveDay.bind(this));
-        // this.dayLinks.forEach(a =>
-        //     a.addEventListener("click", this.setActiveDay.bind(this)));
-        // this.dayLinks.onClick = function(e) {
-        //         console.log(e.target);
-        // }
     }
 
 
@@ -40,21 +35,13 @@ export default class Calendar {
     getMonthState(year, month) {
         // firstDayInMonth -- первый день месяца
         const firstDayInMonth = this.createDay(year, month, 1);
-        console.log(firstDayInMonth);
-
         // lastDayInMonth -- посдедний день месяца
         const lastDayInMonth = this.createDay(year, month + 1, 0);
-        console.log(lastDayInMonth);
-
         // firstDayWeekIdx -- индекс дня недели(начинается с 0 - ВС, 1 - ПН...)
         const firstDayWeekIdx = firstDayInMonth.getDay();
-        console.log(firstDayWeekIdx);
-
         // firstDayShift - находим сдвиг первого дня месяца относительно дней недели
         // const firstDayShift = firstDayWeekIdx === 0 ? 6 : firstDayWeekIdx - 1;
         const firstDayShift = (firstDayWeekIdx + 6) % 7;
-        console.log(firstDayShift);
-
         const nearestMonday = this.createDay(year, month, 1 - firstDayShift);
         const lastDayWeekIdx = lastDayInMonth.getDay();
         const lastDayShift = (7 - lastDayWeekIdx) % 7;
@@ -81,7 +68,6 @@ export default class Calendar {
 
     setMonth(month, year) {
         this.state = this.getMonthState(year, month);
-        console.log(this.state);
         this.render();
     }
 
@@ -90,7 +76,6 @@ export default class Calendar {
     }
 
     getSelectedYear() {
-        console.log(this.selectYear.value);
         this.setMonth(this.state.month, this.selectYear.value);
     }
 
@@ -120,7 +105,7 @@ export default class Calendar {
         const selectedDate = new Date(selectedDayEl.getAttribute('aria-label'));
 
         this.updateState(selectedDate);
-        console.log(this.state);
+
     }
 
     updateState(selectedDate) {
@@ -139,7 +124,8 @@ export default class Calendar {
         if (day.getMonth() !== this.state.month) {
             rootEl.classList.add('cal-day--not-in-month');
         }
-        l.href = `?day=${day.toJSON().split('T')[0]}`;
+        // l.href = `?day=${day.toJSON().split('T')[0]}`;
+        l.href = `?day=${day.toLocaleDateString().split('.').reverse().join('-')}`;
         l.innerText = day.getDate();
         l.setAttribute('aria-label', day.toDateString());
         l.classList.add('cal-dayLink');
@@ -147,8 +133,6 @@ export default class Calendar {
         // находим сегодняшний день при рендере календаря
         const today = new Date();
         if (this.compareDatesWithoutTime(day, today)) {
-            // console.log(day);
-            // console.log(today);
             l.className = 'cal-dayLink';
             l.classList.add('now-day');
         }
@@ -184,7 +168,6 @@ export default class Calendar {
 
     render() {
         const {days} = this.state;
-        // console.log('this.state',this.state);
         this.daysList.innerText = '';
         this.selectMonth.innerText = '';
         this.selectYear.innerText = '';
@@ -192,7 +175,6 @@ export default class Calendar {
         this.daysList.append(...days.map(day => this.createDayLink(day)));
         this.selectMonth.append(...this.monthList.map(month => this.createMonthSelect(month)));
         this.selectYear.append(...this.yearList.map(year => this.createYearSelect(year)));
-        // console.log('dayLinks',this.dayLinks);
     }
 }
 

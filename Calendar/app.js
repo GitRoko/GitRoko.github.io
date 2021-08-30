@@ -1,3 +1,4 @@
+import TimeLineInSchedule from './timeLineInSchedule.js';
 import Calendar from './calendar.js';
 import Schedule from './schedule.js';
 
@@ -26,6 +27,9 @@ const YEAR_LIST = function (fromYear, toYear) {
 
 const calendar = new Calendar(document.querySelector('.cal'), [...MONTH_LIST], [...YEAR_LIST]);
 const schedule = new Schedule(document.querySelector('.schedule'));
+const timeLine = new TimeLineInSchedule(document.querySelector('.schedule'));
+
+timeLine.init();
 
 console.log(calendar);
 console.log(schedule);
