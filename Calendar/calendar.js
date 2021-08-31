@@ -1,5 +1,5 @@
 export default class Calendar {
-    constructor(rootEl, monthList, yearList, onSetActiveDay) {
+    constructor(rootEl, monthList, yearList, onSetActiveDay, activeDay) {
 
         this.yearList = yearList;
         this.monthList = monthList;
@@ -11,12 +11,14 @@ export default class Calendar {
         this.daysList = rootEl.querySelector('.cal-days');
 
         const currentDay = new Date();
-        this.state = this.getMonthState(currentDay.getFullYear(), currentDay.getMonth());
-
+        this.state = {
+            monthInfo: this.getMonthInfo(currentDay.getFullYear(), currentDay.getMonth()),
+            selectedDate: activeDay ? activeDay : currentDay
+        };
         this.prevBtn.addEventListener('click', this.prevMonth.bind(this));
         this.nextBtn.addEventListener('click', this.nextMonth.bind(this));
-        this.selectMonth.addEventListener('change', this.getSelectedMonth.bind(this));
-        this.selectYear.addEventListener('change', this.getSelectedYear.bind(this));
+        this.selectMonth.addEventListener('change', this.setSelectedMonth.bind(this));
+        this.selectYear.addEventListener('change', this.setSelectedYear.bind(this));
         this.daysList.addEventListener('click', this.setActiveDay.bind(this));
 
         this.onSetActiveDay = onSetActiveDay;
@@ -33,7 +35,7 @@ export default class Calendar {
         return new Date(year, month, day, 0, 0, 0);
     }
 
-    getMonthState(year, month) {
+    getMonthInfo(year, month) {
         // firstDayInMonth -- первый день месяца
         const firstDayInMonth = this.createDay(year, month, 1);
         // lastDayInMonth -- посдедний день месяца
@@ -56,36 +58,38 @@ export default class Calendar {
         ) {
             days.push(new Date(currentDay));
         }
-        const today = new Date();
-        const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+        // return days;
+        // const today = new Date();
+        // const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         return {
             days,
             month: firstDayInMonth.getMonth(),
             year: firstDayInMonth.getFullYear(),
-            today: todayDate,
-            selectedDate: todayDate,
+            // today: todayDate,
+            // selectedDate: todayDate,
         };
     }
 
     setMonth(month, year) {
-        this.state = this.getMonthState(year, month);
+        this.updateState(null, this.getMonthInfo(year, month));
         this.render();
     }
 
-    getSelectedMonth() {
-        this.setMonth(this.selectMonth.options.selectedIndex, this.state.year);
+    setSelectedMonth() {
+        this.setMonth(this.selectMonth.options.selectedIndex, this.state.monthInfo.year);
     }
 
-    getSelectedYear() {
-        this.setMonth(this.state.month, this.selectYear.value);
+    setSelectedYear() {
+        this.setMonth(this.state.monthInfo.month, this.selectYear.value);
     }
 
     nextMonth() {
-        this.setMonth(this.state.month + 1, this.state.year);
+        this.setMonth(this.state.monthInfo.month + 1, this.state.monthInfo.year);
     }
 
     prevMonth() {
-        this.setMonth(this.state.month - 1, this.state.year);
+        this.setMonth(this.state.monthInfo.month - 1, this.state.monthInfo.year);
     }
 
     setActiveDay(e) {
@@ -113,11 +117,15 @@ export default class Calendar {
     }
 
 
-    updateState(selectedDate) {
-        this.state.selectedDate = selectedDate;
-        this.state.year = selectedDate.getFullYear();
-        this.state.month = selectedDate.getMonth();
+    updateState(selectedDate, monthInfo) {
+        if (selectedDate) {
+            this.state.selectedDate = selectedDate;
+        }
+        if (monthInfo) {
+            this.state.monthInfo = monthInfo;
+        }
     }
+
 
     createDayLink(day) {
         const rootEl = document.createElement('li');
@@ -126,7 +134,7 @@ export default class Calendar {
         rootEl.append(l);
         rootEl.className = 'cal-day';
 
-        if (day.getMonth() !== this.state.month) {
+        if (day.getMonth() !== this.state.monthInfo.month) {
             rootEl.classList.add('cal-day--not-in-month');
         }
         l.href = `?day=${day.toJSON().split('T')[0]}`;
@@ -145,6 +153,11 @@ export default class Calendar {
         return rootEl;
     }
 
+    // Вместо 2-х следующих методов сделать один общий
+    // createSelectOption (optionValue, optionInnerText, selectedValue)
+    // Для списка месяцев вызов будет выглядеть
+    // createSelectOption(this.monthList.indexOf(month), month,  this.state.monthInfo.month)
+    // Для списка годов  - createSelectOption(year, year, this.state.monthInfo.year)
     createMonthSelect(month) {
 
         const optionEl = document.createElement('option');
@@ -152,7 +165,7 @@ export default class Calendar {
         optionEl.setAttribute('value', `${this.monthList.indexOf(month)}`);
         optionEl.innerText = month;
 
-        if (this.monthList.indexOf(month) === this.state.month) {
+        if (this.monthList.indexOf(month) === this.state.monthInfo.month) {
             optionEl.defaultSelected = true;
         }
         return optionEl;
@@ -165,18 +178,19 @@ export default class Calendar {
         optionEl.setAttribute('value', `${year}`);
         optionEl.innerText = year;
 
-        if (year === this.state.year) {
+        if (year === this.state.monthInfo.year) {
             optionEl.defaultSelected = true;
         }
         return optionEl;
     }
 
     render() {
-        const {days} = this.state;
+        const {days} = this.state.monthInfo;
         this.daysList.innerText = '';
         this.selectMonth.innerText = '';
         this.selectYear.innerText = '';
-
+        // нужно создавать списки опций для месяцев и годов только при первой отрисовке календаря.
+        // При последующих - достаточно сбросить текущее выделение и проставить новое
         this.daysList.append(...days.map(day => this.createDayLink(day)));
         this.selectMonth.append(...this.monthList.map(month => this.createMonthSelect(month)));
         this.selectYear.append(...this.yearList.map(year => this.createYearSelect(year)));
