@@ -25,15 +25,25 @@ const YEAR_LIST = function (fromYear, toYear) {
     return genArrYear;
 }(1970, 2050);
 
-function onSetActiveDay(state) {
-    console.log(state?.selectedDate);
+
+function onSelectedDayChanged(selectedDay) {
+    if (!selectedDay)
+        return;
+
+    const events = getEvents(selectedDay);
+    schedule.selectedDayChanged(selectedDay, events);
+}
+
+function getEvents(selectedDay) {
+    //TODO: сделать вычитку событий из localStorage для выбранного дня
+    return [];
 }
 
 const calendar = new Calendar(
     document.querySelector('.cal'),
     [...MONTH_LIST],
     [...YEAR_LIST],
-    onSetActiveDay);
+    onSelectedDayChanged);
 
 const schedule = new Schedule(document.querySelector('.schedule'));
 const timeLine = new TimeLineInSchedule(document.querySelector('.schedule'));
@@ -44,4 +54,3 @@ timeLine.init();
 
 console.log(calendar);
 console.log(schedule);
-

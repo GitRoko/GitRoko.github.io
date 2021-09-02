@@ -9,14 +9,19 @@ body {
 .container {
     width: 100%;
     margin: 30px auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-
-
+    display: flex;
+    /*grid-template-columns: 2fr 1fr;*/
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .schedule {
+    width: 100%;
+    order: 0;
+}
 
+.schedule-header {
+    text-align: center;
 }
 
 .schedule-timeBlocks {
@@ -182,6 +187,7 @@ body {
     background-color: #3d3e41;
     padding-right: 15px;
     padding-left: 15px;
+    order: 1;
 }
 
 .cal ul {
@@ -296,4 +302,18 @@ body {
     border-radius: 50%;
     background-color: rgb(223, 57, 57);
     color: rgb(29, 28, 28);
+}
+
+@media screen and (max-width: 425px) {
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .schedule {
+        order: 0;
+    }
+
+    .cal {
+        order: -1;
+    }
 }

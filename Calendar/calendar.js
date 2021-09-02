@@ -1,5 +1,5 @@
 export default class Calendar {
-    constructor(rootEl, monthList, yearList, onSetActiveDay, activeDay) {
+    constructor(rootEl, monthList, yearList, onSelectedDayChanged, activeDay) {
 
         this.yearList = yearList;
         this.monthList = monthList;
@@ -21,7 +21,7 @@ export default class Calendar {
         this.selectYear.addEventListener('change', this.setSelectedYear.bind(this));
         this.daysList.addEventListener('click', this.setActiveDay.bind(this));
 
-        this.onSetActiveDay = onSetActiveDay;
+        this.onSelectedDayChanged = onSelectedDayChanged;
     }
 
 
@@ -110,10 +110,9 @@ export default class Calendar {
         const selectedDate = new Date(selectedDayEl.getAttribute('aria-label'));
 
         this.updateState(selectedDate);
-        if (this.onSetActiveDay) {
-            this.onSetActiveDay(this.state);
+        if (this.onSelectedDayChanged) {
+            this.onSelectedDayChanged(this.state);
         }
-
     }
 
 
