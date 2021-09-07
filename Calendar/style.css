@@ -54,7 +54,7 @@ body {
     color: rgb(223, 57, 57);
     position: relative;
     width: 100%;
-    top: 0px;
+    top: 0;
     z-index: 10;
 }
 
@@ -288,7 +288,7 @@ body {
     display: block;
 }
 
-.cal-day a.active-day {
+.cal-day .active-day {
     border-radius: 50%;
     background-color: #ECEFF1;
     color: #696969;
@@ -298,10 +298,15 @@ body {
 /*    background-color: #ECEFF1;*/
 /*    color: rgb(29, 28, 28);*/
 /*}*/
-.now-day {
+.cal-day .now-day, .now-day.active-day {
     border-radius: 50%;
     background-color: rgb(223, 57, 57);
     color: rgb(29, 28, 28);
+}
+.now-day.active-day {
+    border-radius: 50%;
+    background-color: #ECEFF1;
+    color: rgb(223, 57, 57);
 }
 
 @media screen and (max-width: 425px) {

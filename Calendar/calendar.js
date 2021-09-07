@@ -1,3 +1,4 @@
+
 export default class Calendar {
     constructor(rootEl, monthList, yearList, onSelectedDayChanged, activeDay) {
 
@@ -20,15 +21,16 @@ export default class Calendar {
         this.selectMonth.addEventListener('change', this.setSelectedMonth.bind(this));
         this.selectYear.addEventListener('change', this.setSelectedYear.bind(this));
         this.daysList.addEventListener('click', this.setActiveDay.bind(this));
-
+        this.createListOptions();
         this.onSelectedDayChanged = onSelectedDayChanged;
     }
 
-
     compareDatesWithoutTime(date1, date2) {
-        return date1.getDate() === date2.getDate() &&
-            date1.getMonth() === date2.getMonth() &&
-            date1.getFullYear() === date2.getFullYear();
+        let newDate1 = new Date(date1);
+        let newDate2 = new Date(date2);
+        return newDate1.getDate() === newDate2.getDate() &&
+            newDate1.getMonth() === newDate2.getMonth() &&
+            newDate1.getFullYear() === newDate2.getFullYear();
     }
 
     createDay(year, month, day) {
@@ -36,20 +38,16 @@ export default class Calendar {
     }
 
     getMonthInfo(year, month) {
-        // firstDayInMonth -- первый день месяца
         const firstDayInMonth = this.createDay(year, month, 1);
-        // lastDayInMonth -- посдедний день месяца
         const lastDayInMonth = this.createDay(year, month + 1, 0);
-        // firstDayWeekIdx -- индекс дня недели(начинается с 0 - ВС, 1 - ПН...)
         const firstDayWeekIdx = firstDayInMonth.getDay();
-        // firstDayShift - находим сдвиг первого дня месяца относительно дней недели
-        // const firstDayShift = firstDayWeekIdx === 0 ? 6 : firstDayWeekIdx - 1;
         const firstDayShift = (firstDayWeekIdx + 6) % 7;
         const nearestMonday = this.createDay(year, month, 1 - firstDayShift);
         const lastDayWeekIdx = lastDayInMonth.getDay();
         const lastDayShift = (7 - lastDayWeekIdx) % 7;
         const nearestSunday = this.createDay(year, month + 1, lastDayShift);
         const days = [];
+
 
         for (
             const currentDay = new Date(nearestMonday);
@@ -58,46 +56,53 @@ export default class Calendar {
         ) {
             days.push(new Date(currentDay));
         }
-
-        // return days;
-        // const today = new Date();
-        // const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         return {
             days,
             month: firstDayInMonth.getMonth(),
             year: firstDayInMonth.getFullYear(),
-            // today: todayDate,
-            // selectedDate: todayDate,
         };
     }
 
-    setMonth(month, year) {
+    setMonth(year, month) {
         this.updateState(null, this.getMonthInfo(year, month));
         this.render();
     }
 
     setSelectedMonth() {
-        this.setMonth(this.selectMonth.options.selectedIndex, this.state.monthInfo.year);
+        this.state.monthInfo.month = parseInt(this.selectMonth.value, 10);
+        this.setMonth(this.state.monthInfo.year, this.state.monthInfo.month);
     }
 
     setSelectedYear() {
-        this.setMonth(this.state.monthInfo.month, this.selectYear.value);
+        this.state.monthInfo.year = parseInt(this.selectYear.value, 10);
+        this.setMonth(this.state.monthInfo.year, this.state.monthInfo.month);
     }
 
     nextMonth() {
-        this.setMonth(this.state.monthInfo.month + 1, this.state.monthInfo.year);
+        this.setMonth(this.state.monthInfo.year, this.state.monthInfo.month + 1);
     }
 
     prevMonth() {
-        this.setMonth(this.state.monthInfo.month - 1, this.state.monthInfo.year);
+        this.setMonth(this.state.monthInfo.year, this.state.monthInfo.month - 1);
     }
 
     setActiveDay(e) {
         e.preventDefault();
 
         const selectedDayEl = e.target;
+        const selectedDate = new Date(selectedDayEl.getAttribute('aria-label'));
+
+        if (this.state.month !== selectedDate.getMonth()) {
+            this.setMonth(selectedDate.getFullYear(), selectedDate.getMonth());
+        }
+
         if (!selectedDayEl) {
             return;
+        }
+
+        this.updateState(selectedDate);
+        if (this.onSelectedDayChanged) {
+            this.onSelectedDayChanged(this.state);
         }
 
         const dayLink = this.rootEl.querySelector('.active-day');
@@ -105,14 +110,15 @@ export default class Calendar {
             dayLink.classList.remove('active-day');
         }
 
-        selectedDayEl.classList.add('active-day');
+        const dayLinks = this.rootEl.querySelectorAll('.cal-dayLink');
 
-        const selectedDate = new Date(selectedDayEl.getAttribute('aria-label'));
+        dayLinks.forEach((el) => {
+            let dateEl = el.getAttribute('aria-label');
 
-        this.updateState(selectedDate);
-        if (this.onSelectedDayChanged) {
-            this.onSelectedDayChanged(this.state);
-        }
+            if (this.compareDatesWithoutTime(dateEl, selectedDate)) {
+                el.classList.add('active-day');
+            }
+        });
     }
 
 
@@ -125,30 +131,27 @@ export default class Calendar {
         }
     }
 
-
     createDayLink(day) {
         const rootEl = document.createElement('li');
         const l = document.createElement('a');
-
+        const dayText = day.toLocaleDateString().split('.').reverse().join('-');
         rootEl.append(l);
         rootEl.className = 'cal-day';
 
         if (day.getMonth() !== this.state.monthInfo.month) {
             rootEl.classList.add('cal-day--not-in-month');
         }
-        l.href = `?day=${day.toJSON().split('T')[0]}`;
-        // l.href = `?day=${day.toLocaleDateString().split('/').reverse().join('-')}`;
+
+        l.href = `?day=${dayText}`;
         l.innerText = day.getDate();
-        l.setAttribute('aria-label', day.toDateString());
+        l.setAttribute('aria-label', day);
         l.classList.add('cal-dayLink');
 
-        // находим сегодняшний день при рендере календаря
         const today = new Date();
         if (this.compareDatesWithoutTime(day, today)) {
             l.className = 'cal-dayLink';
             l.classList.add('now-day');
         }
-
         return rootEl;
     }
 
@@ -157,42 +160,29 @@ export default class Calendar {
     // Для списка месяцев вызов будет выглядеть
     // createSelectOption(this.monthList.indexOf(month), month,  this.state.monthInfo.month)
     // Для списка годов  - createSelectOption(year, year, this.state.monthInfo.year)
-    createMonthSelect(month) {
-
+    createOption(optionValue, optionInnerText, selectedValue) {
         const optionEl = document.createElement('option');
 
-        optionEl.setAttribute('value', `${this.monthList.indexOf(month)}`);
-        optionEl.innerText = month;
-
-        if (this.monthList.indexOf(month) === this.state.monthInfo.month) {
-            optionEl.defaultSelected = true;
+        optionEl.setAttribute('value', `${optionValue}`);
+        optionEl.innerText = optionInnerText;
+        if (optionValue === selectedValue) {
+                optionEl.defaultSelected = true;
         }
         return optionEl;
     }
 
-    createYearSelect(year) {
-
-        const optionEl = document.createElement('option');
-
-        optionEl.setAttribute('value', `${year}`);
-        optionEl.innerText = year;
-
-        if (year === this.state.monthInfo.year) {
-            optionEl.defaultSelected = true;
-        }
-        return optionEl;
+    createListOptions() {
+        this.selectMonth.append(...this.monthList.map(el => this.createOption(this.monthList.indexOf(el), el, this.state.monthInfo.month)));
+        this.selectYear.append(...this.yearList.map(el => this.createOption(el, el, this.state.monthInfo.year)));
     }
 
     render() {
         const {days} = this.state.monthInfo;
         this.daysList.innerText = '';
-        this.selectMonth.innerText = '';
-        this.selectYear.innerText = '';
+        this.daysList.append(...days.map(day => this.createDayLink(day)));
         // нужно создавать списки опций для месяцев и годов только при первой отрисовке календаря.
         // При последующих - достаточно сбросить текущее выделение и проставить новое
-        this.daysList.append(...days.map(day => this.createDayLink(day)));
-        this.selectMonth.append(...this.monthList.map(month => this.createMonthSelect(month)));
-        this.selectYear.append(...this.yearList.map(year => this.createYearSelect(year)));
+        this.selectMonth.selectedIndex = this.state.monthInfo.month;
+        this.selectYear.selectedIndex = this.yearList.indexOf(this.state.monthInfo.year);
     }
 }
-
