@@ -16,7 +16,10 @@
 <body>
 <div class="container">
     <div class="schedule">
-        <div class="schedule-header">ЧТ, 2 Сентябрь 2021 г.</div>
+        <div class="schedule-header">
+            <div class="shedule-title">ЧТ, 2 Сентябрь 2021 г.</div>
+            <button class="btn-addEvent" type="button">+</button>
+        </div>
         <ul class="schedule-timeBlocks">
             <li class="timeline"></li>
             <li class="schedule-timeBlock"></li>
@@ -74,10 +77,28 @@
                 <li class="cal-week-day">Вс</li>
             </ul>
             <ul class="cal-days">
-<!--                <li class="cal-day cal-day&#45;&#45;not-in-month"><a href="?day=2021-07-31" aria-label="Sat Jul 31 2021">31</a>-->
-<!--                </li>-->
-<!--                <li class="cal-day"><a href="?day=2021-08-01" aria-label="Sun Aug 01 2021">1</a></li>-->
+
             </ul>
+        </div>
+    </div>
+    <div id="addEvent" class="modal">
+        <div class="modal__body">
+            <div class="modal__content">
+                <form action="" class="eventForm">
+                    <div class="modal__header">
+                        <h2>Событие</h2>
+                        <a href="" class="modal__close">+</a>
+                    </div>
+                    <div class="modal__body">
+                            <label for="titleEvent"></label>
+                            <input type="text" id="titleEvent" class="titleEvent" placeholder="Название">
+                    </div>
+                    <div class="modal__footer">
+                        <button class="eventForm__submit" type="submit">Добавить</button>
+                        <button class="eventForm__cancel" type="reset">Отмена</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>

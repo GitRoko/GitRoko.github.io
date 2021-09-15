@@ -1,6 +1,6 @@
 
 export default class Calendar {
-    constructor(rootEl, monthList, yearList, onSelectedDayChanged, activeDay) {
+    constructor(rootEl, monthList, yearList, onSelectedDayChanged, activeDay, selectedDate) {
 
         this.yearList = yearList;
         this.monthList = monthList;
@@ -21,7 +21,6 @@ export default class Calendar {
         this.selectMonth.addEventListener('change', this.setSelectedMonth.bind(this));
         this.selectYear.addEventListener('change', this.setSelectedYear.bind(this));
         this.daysList.addEventListener('click', this.setActiveDay.bind(this));
-        this.createListOptions();
         this.onSelectedDayChanged = onSelectedDayChanged;
     }
 
@@ -48,7 +47,6 @@ export default class Calendar {
         const nearestSunday = this.createDay(year, month + 1, lastDayShift);
         const days = [];
 
-
         for (
             const currentDay = new Date(nearestMonday);
             currentDay <= nearestSunday;
@@ -58,13 +56,20 @@ export default class Calendar {
         }
         return {
             days,
-            month: firstDayInMonth.getMonth(),
-            year: firstDayInMonth.getFullYear(),
+            month: month,
+            year: year,
         };
     }
 
     setMonth(year, month) {
+        if (month < 0 || month > 11) {
+            month = new Date().getMonth();
+        }
+        if (year < 1970 || year > 2050) {
+            year = new Date().getFullYear();
+        }
         this.updateState(null, this.getMonthInfo(year, month));
+
         this.render();
     }
 
@@ -102,9 +107,13 @@ export default class Calendar {
 
         this.updateState(selectedDate);
         if (this.onSelectedDayChanged) {
-            this.onSelectedDayChanged(this.state);
+            this.onSelectedDayChanged(selectedDate);
         }
 
+       this.toggleClassActiveDay();
+    }
+
+    toggleClassActiveDay() {
         const dayLink = this.rootEl.querySelector('.active-day');
         if (dayLink) {
             dayLink.classList.remove('active-day');
@@ -115,7 +124,7 @@ export default class Calendar {
         dayLinks.forEach((el) => {
             let dateEl = el.getAttribute('aria-label');
 
-            if (this.compareDatesWithoutTime(dateEl, selectedDate)) {
+            if (this.compareDatesWithoutTime(dateEl, this.state.selectedDate)) {
                 el.classList.add('active-day');
             }
         });
@@ -155,34 +164,33 @@ export default class Calendar {
         return rootEl;
     }
 
-    // Вместо 2-х следующих методов сделать один общий
-    // createSelectOption (optionValue, optionInnerText, selectedValue)
-    // Для списка месяцев вызов будет выглядеть
-    // createSelectOption(this.monthList.indexOf(month), month,  this.state.monthInfo.month)
-    // Для списка годов  - createSelectOption(year, year, this.state.monthInfo.year)
     createOption(optionValue, optionInnerText, selectedValue) {
         const optionEl = document.createElement('option');
 
         optionEl.setAttribute('value', `${optionValue}`);
         optionEl.innerText = optionInnerText;
+
         if (optionValue === selectedValue) {
                 optionEl.defaultSelected = true;
         }
+
         return optionEl;
     }
 
     createListOptions() {
-        this.selectMonth.append(...this.monthList.map(el => this.createOption(this.monthList.indexOf(el), el, this.state.monthInfo.month)));
-        this.selectYear.append(...this.yearList.map(el => this.createOption(el, el, this.state.monthInfo.year)));
+        if (this.selectMonth.options.length === 0) {
+            this.selectMonth.append(...this.monthList.map(el => this.createOption(this.monthList.indexOf(el), el, this.state.monthInfo.month)));
+        } else {this.selectMonth.selectedIndex = this.state.monthInfo.month;}
+        if (this.selectYear.options.length === 0) {
+            this.selectYear.append(...this.yearList.map(el => this.createOption(el, el, this.state.monthInfo.year)));
+        } else {this.selectYear.selectedIndex = this.yearList.indexOf(this.state.monthInfo.year);}
     }
 
     render() {
         const {days} = this.state.monthInfo;
         this.daysList.innerText = '';
         this.daysList.append(...days.map(day => this.createDayLink(day)));
-        // нужно создавать списки опций для месяцев и годов только при первой отрисовке календаря.
-        // При последующих - достаточно сбросить текущее выделение и проставить новое
-        this.selectMonth.selectedIndex = this.state.monthInfo.month;
-        this.selectYear.selectedIndex = this.yearList.indexOf(this.state.monthInfo.year);
+        this.createListOptions();
+        this.toggleClassActiveDay();
     }
 }
