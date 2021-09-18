@@ -35,17 +35,45 @@ function onSelectedDayChanged(selectedDay) {
 }
 
 function getEvents(selectedDay) {
+    console.log(selectedDay);
     //TODO: сделать вычитку событий из localStorage для выбранного дня
+
+    // const getEventsFromLocalStorage =
     return [];
 }
+
+function onEventAdded(event) {
+    //todo >> event
+
+    localStorage.setItem(event.id.toString(), JSON.stringify(event));
+
+    schedule.selectedDayChanged(schedule.selectedDay, getEvents(schedule.selectedDay));
+}
+
+// function onValidateEvent(event) {
+//     if (typeof event.id === "number"
+//         && typeof event.title === "string"
+//         && typeof event.startEvent === "string"
+//         && typeof event.endEvent === "string") {
+//         return event;
+//     } else return false;
+// }
+const initialDate = new Date();
 
 const calendar = new Calendar(
     document.querySelector('.cal'),
     [...MONTH_LIST],
     [...YEAR_LIST],
-    onSelectedDayChanged);
+    onSelectedDayChanged,
+    initialDate);
 
-const schedule = new Schedule(document.querySelector('.schedule'));
+const schedule = new Schedule(
+    document.querySelector('.schedule'),
+    initialDate,
+    getEvents(initialDate),
+    onEventAdded,
+    );
+
 const timeLine = new TimeLineInSchedule(document.querySelector('.schedule'));
 
 calendar.render();

@@ -17,7 +17,7 @@
 <div class="container">
     <div class="schedule">
         <div class="schedule-header">
-            <div class="shedule-title">ЧТ, 2 Сентябрь 2021 г.</div>
+            <div class="schedule-title">ЧТ, 2 Сентябрь 2021 г.</div>
             <button class="btn-addEvent" type="button">+</button>
         </div>
         <ul class="schedule-timeBlocks">
@@ -90,8 +90,16 @@
                         <a href="" class="modal__close">+</a>
                     </div>
                     <div class="modal__body">
-                            <label for="titleEvent"></label>
-                            <input type="text" id="titleEvent" class="titleEvent" placeholder="Название">
+                        <label for="titleEvent"></label>
+                        <input type="text" id="titleEvent" class="titleEvent" placeholder="Название">
+                       <div class="wrapStartEvent">
+                           <label for="dateStartEvent">Начало: </label>
+                           <input type="datetime-local" id="dateStartEvent" class="dateEvent" required>
+                       </div>
+                        <div class="wrapEndEvent">
+                            <label for="dateEndEvent">Конец: </label>
+                            <input type="datetime-local" id="dateEndEvent" class="dateEvent" required>
+                        </div>
                     </div>
                     <div class="modal__footer">
                         <button class="eventForm__submit" type="submit">Добавить</button>

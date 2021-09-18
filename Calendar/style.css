@@ -360,6 +360,39 @@ body {
     justify-content: center;
     align-items: center;
     padding: 30px 10px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+}
+.modal__body .wrapStartEvent,
+.modal__body .wrapEndEvent {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    margin: 15px 0;
+}
+.modal__body .wrapStartEvent label[for="dateStartEvent"],
+.modal__body .wrapEndEvent label[for="dateEndEvent"]{
+   align-self: flex-start;
+    margin-bottom: 5px;
+    font-size: 1em;
+
+}
+.modal__body .wrapStartEvent input[type="datetime-local"],
+.modal__body .wrapEndEvent input[type="datetime-local"]{
+    width: 210px;
+    border: none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-bottom: solid 1px #000000;
+    font-size: 0.8em;
+    color: #ECEFF1;
 }
 .modal__content {
     background-color: #3d3e41;
@@ -388,7 +421,7 @@ body {
     transform: rotate(45deg);
 }
 .eventForm .titleEvent {
-    border:none;
+    border: none;
     background-image:none;
     background-color:transparent;
     -webkit-box-shadow: none;
