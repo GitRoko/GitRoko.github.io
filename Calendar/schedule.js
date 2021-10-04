@@ -5,9 +5,16 @@ export default class Schedule {
     // selectedDay, events, onEventAdded,
     // onEventChanged, onEventDeleted, onValidateEvent
     // в этом классе. Соответсвующие функции определить в app.js
-    constructor(rootEl, selectedDay, events, eventAdded, eventChanged, eventDeleted, validateEvent) {
+    constructor(
+        rootEl,
+        events,
+        eventAdded,
+        eventChanged,
+        eventDeleted,
+        validateEvent,
+        selectedDate = new Date()) {
         this.rootEl = rootEl;
-        this.selectedDay = selectedDay;
+        this.selectedDate = selectedDate;
         this.events = events;
         this.eventAdded = eventAdded;
         this.eventChanged = eventChanged;
@@ -31,6 +38,7 @@ export default class Schedule {
         this.submitEvent.addEventListener('submit', this.addEvent.bind(this));
 
         this.init();
+
     }
 
     init() {
@@ -39,7 +47,7 @@ export default class Schedule {
 
     selectedDayChanged(selectedDay, events) {
         //TODO: написать логику отрисовки контрола для выбранного дня и списка событий этого дня
-        this.selectedDay = selectedDay;
+
     }
 
     addEvent() {
@@ -62,17 +70,17 @@ export default class Schedule {
 
 
     dateToLocal() {
-        const date = this.selectedDay ?? new Date();
+        const date = this.selectedDate ?? new Date();
         const dateLocalTimeToString = {
             date: date.getDate(),
             month: date.getMonth() + 1,
             year: date.getFullYear(),
             hours: date.getHours(),
             minutes: date.getMinutes(),
-            makeDate: function() {
+            makeDate: function () {
                 return `${this.year.toString()}-${this.month.toString().padStart(2, "0")}-${this.date.toString().padStart(2, "0")}`
             },
-            makeId: function() {
+            makeId: function () {
                 return date.getTime();
             },
             defaultStartTime: function () {
@@ -89,7 +97,8 @@ export default class Schedule {
             return dateLocalTimeToString.defaultEndTime();
         } else if (arguments[0] === 'id') {
             return dateLocalTimeToString.makeId();
-        } return null;
+        }
+        return null;
     }
 
 
@@ -108,18 +117,13 @@ export default class Schedule {
         this.endEvent.value = `${this.dateToLocal('end')}`;
 
 
-
-        // if (this.validateEvent(event)) {
-        //     return event;
-        // }
     }
-    // validateEvent() {
-    //
-    // }
+
     closeAddEventDialog(e) {
         e.preventDefault();
         this.modal.classList.remove('modal-visible');
     }
+
     cancelAddEventDialog() {
         this.modal.classList.remove('modal-visible');
     }

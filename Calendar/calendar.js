@@ -1,6 +1,6 @@
 
 export default class Calendar {
-    constructor(rootEl, monthList, yearList, onSelectedDayChanged, activeDay, selectedDate) {
+    constructor(rootEl, monthList, yearList, onSelectedDayChanged, selectedDate = new Date()) {
 
         this.yearList = yearList;
         this.monthList = monthList;
@@ -11,10 +11,10 @@ export default class Calendar {
         this.selectYear = rootEl.querySelector('.select-year');
         this.daysList = rootEl.querySelector('.cal-days');
 
-        const currentDay = new Date();
+        const today = new Date();
         this.state = {
-            monthInfo: this.getMonthInfo(currentDay.getFullYear(), currentDay.getMonth()),
-            selectedDate: activeDay ? activeDay : currentDay
+            monthInfo: this.getMonthInfo(today.getFullYear(), today.getMonth()),
+            selectedDate: selectedDate
         };
         this.prevBtn.addEventListener('click', this.prevMonth.bind(this));
         this.nextBtn.addEventListener('click', this.nextMonth.bind(this));
@@ -61,16 +61,25 @@ export default class Calendar {
         };
     }
 
+// todo fix <0 & >11!!! обработка граничных допустимых условий
     setMonth(year, month) {
-        if (month < 0 || month > 11) {
-            month = new Date().getMonth();
+        if (month < 0) {
+            // month = new Date().getMonth();
+            month = 11;
+            year -= 1;
+        } else if (month > 11) {
+            month = 0;
+            year += 1;
         }
-        if (year < 1970 || year > 2050) {
-            year = new Date().getFullYear();
+        if (year < 1970) {
+            // year = new Date().getFullYear();
+            year = 2050;
+        } else if (year > 2050) {
+            year = 1970;
         }
         this.updateState(null, this.getMonthInfo(year, month));
 
-        this.render();
+        this.update();
     }
 
     setSelectedMonth() {
@@ -171,26 +180,46 @@ export default class Calendar {
         optionEl.innerText = optionInnerText;
 
         if (optionValue === selectedValue) {
-                optionEl.defaultSelected = true;
+            optionEl.defaultSelected = true;
         }
 
         return optionEl;
     }
 
+
+    // todo refactoring!!
     createListOptions() {
         if (this.selectMonth.options.length === 0) {
             this.selectMonth.append(...this.monthList.map(el => this.createOption(this.monthList.indexOf(el), el, this.state.monthInfo.month)));
-        } else {this.selectMonth.selectedIndex = this.state.monthInfo.month;}
+        } else {
+            this.selectMonth.selectedIndex = this.state.monthInfo.month;
+        }
+
         if (this.selectYear.options.length === 0) {
             this.selectYear.append(...this.yearList.map(el => this.createOption(el, el, this.state.monthInfo.year)));
-        } else {this.selectYear.selectedIndex = this.yearList.indexOf(this.state.monthInfo.year);}
+        } else {
+            this.selectYear.selectedIndex = this.yearList.indexOf(this.state.monthInfo.year);
+        }
     }
 
-    render() {
+
+    init() {
         const {days} = this.state.monthInfo;
         this.daysList.innerText = '';
         this.daysList.append(...days.map(day => this.createDayLink(day)));
         this.createListOptions();
+        this.toggleClassActiveDay();
+    }
+
+    update() {
+        const {days} = this.state.monthInfo;
+        this.daysList.innerText = '';
+        this.daysList.append(...days.map(day => this.createDayLink(day)));
+        //this.createListOptions();
+
+        this.selectMonth.selectedIndex = this.state.monthInfo.month;
+        this.selectYear.selectedIndex = this.yearList.indexOf(this.state.monthInfo.year);
+
         this.toggleClassActiveDay();
     }
 }

@@ -47,7 +47,7 @@ function onEventAdded(event) {
 
     localStorage.setItem(event.id.toString(), JSON.stringify(event));
 
-    schedule.selectedDayChanged(schedule.selectedDay, getEvents(schedule.selectedDay));
+    schedule.selectedDayChanged(schedule.selectedDate, getEvents(schedule.selectedDate));
 }
 
 // function onValidateEvent(event) {
@@ -58,25 +58,27 @@ function onEventAdded(event) {
 //         return event;
 //     } else return false;
 // }
-const initialDate = new Date();
+const selectedDate = new Date();
 
 const calendar = new Calendar(
     document.querySelector('.cal'),
     [...MONTH_LIST],
     [...YEAR_LIST],
     onSelectedDayChanged,
-    initialDate);
+    selectedDate);
 
 const schedule = new Schedule(
     document.querySelector('.schedule'),
-    initialDate,
-    getEvents(initialDate),
+    getEvents(selectedDate),
     onEventAdded,
-    );
+    undefined,
+    undefined,
+    undefined,
+    selectedDate);
 
 const timeLine = new TimeLineInSchedule(document.querySelector('.schedule'));
 
-calendar.render();
+calendar.init();
 timeLine.init();
 
 
