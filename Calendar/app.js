@@ -35,29 +35,39 @@ function onSelectedDayChanged(selectedDay) {
 }
 
 function getEvents(selectedDay) {
-    console.log(selectedDay);
     //TODO: сделать вычитку событий из localStorage для выбранного дня
 
-    // const getEventsFromLocalStorage =
-    return [];
+    const selectedDayEvents = [];
+
+    Object.keys(localStorage).forEach(function(key){
+        const date1 = new Date(parseInt(key)).setHours(0, 0, 0, 0);
+        const date2 = new Date(selectedDay).setHours(0, 0, 0, 0);
+        if (date1 === date2) {
+            selectedDayEvents.push(localStorage.getItem(key));
+        }
+    });
+
+    return selectedDayEvents;
 }
+
+
 
 function onEventAdded(event) {
     //todo >> event
-
     localStorage.setItem(event.id.toString(), JSON.stringify(event));
 
     schedule.selectedDayChanged(schedule.selectedDate, getEvents(schedule.selectedDate));
 }
 
-// function onValidateEvent(event) {
-//     if (typeof event.id === "number"
-//         && typeof event.title === "string"
-//         && typeof event.startEvent === "string"
-//         && typeof event.endEvent === "string") {
-//         return event;
-//     } else return false;
-// }
+function onValidateEvent(event) {
+    if (typeof event.id === "number"
+        && typeof event.title === "string"
+        && typeof event.startEvent === "string"
+        && typeof event.endEvent === "string") {
+        return true;
+    } else return false;
+}
+
 const selectedDate = new Date();
 
 const calendar = new Calendar(
@@ -73,7 +83,7 @@ const schedule = new Schedule(
     onEventAdded,
     undefined,
     undefined,
-    undefined,
+    onValidateEvent,
     selectedDate);
 
 const timeLine = new TimeLineInSchedule(document.querySelector('.schedule'));

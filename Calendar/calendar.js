@@ -102,24 +102,21 @@ export default class Calendar {
 
     setActiveDay(e) {
         e.preventDefault();
-
         const selectedDayEl = e.target;
-        const selectedDate = new Date(selectedDayEl.getAttribute('aria-label'));
 
-        if (this.state.month !== selectedDate.getMonth()) {
-            this.setMonth(selectedDate.getFullYear(), selectedDate.getMonth());
-        }
-
-        if (!selectedDayEl) {
+        if (selectedDayEl.tagName !== 'A') {
             return;
         }
 
-        this.updateState(selectedDate);
-        if (this.onSelectedDayChanged) {
-            this.onSelectedDayChanged(selectedDate);
+        const selectedDate = new Date(selectedDayEl.getAttribute('aria-label'));
+        if (this.state.month !== selectedDate.getMonth()) {
+            this.setMonth(selectedDate.getFullYear(), selectedDate.getMonth());
+            this.updateState(selectedDate);
+            if (this.onSelectedDayChanged) {
+                this.onSelectedDayChanged(selectedDate);
+            }
+            this.toggleClassActiveDay();
         }
-
-       this.toggleClassActiveDay();
     }
 
     toggleClassActiveDay() {

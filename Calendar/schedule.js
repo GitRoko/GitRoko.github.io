@@ -12,14 +12,16 @@ export default class Schedule {
         eventChanged,
         eventDeleted,
         validateEvent,
-        selectedDate = new Date()) {
+        selectedDay = new Date()) {
         this.rootEl = rootEl;
-        this.selectedDate = selectedDate;
+        this.selectedDay = selectedDay;
         this.events = events;
         this.eventAdded = eventAdded;
         this.eventChanged = eventChanged;
         this.eventDeleted = eventDeleted;
         this.validateEvent = validateEvent;
+
+        this.scheduleTitle = document.querySelector('.schedule-title');
 
         this.modal = document.getElementById('addEvent');
         this.btnAddEvent = document.querySelector('.btn-addEvent')
@@ -30,13 +32,13 @@ export default class Schedule {
         this.titleEvent = document.querySelector('#titleEvent');
         this.startEvent = document.querySelector('#dateStartEvent');
         this.endEvent = document.querySelector('#dateEndEvent');
-        this.submitEvent = document.querySelector('.eventForm__submit');
+        // this.submitEvent = document.querySelector('.eventForm__submit');
 
         this.btnClose.addEventListener('click', this.closeAddEventDialog.bind(this));
         this.btnAddEvent.addEventListener('click', this.showAddEventDialog.bind(this));
         this.btnCansel.addEventListener('click', this.cancelAddEventDialog.bind(this));
-        this.submitEvent.addEventListener('submit', this.addEvent.bind(this));
-
+        this.formEvent.addEventListener('submit', this.addEvent.bind(this));
+        this.renderScheduleTitle(this.selectedDay);
         this.init();
 
     }
@@ -44,10 +46,22 @@ export default class Schedule {
     init() {
 
     }
-
+    renderScheduleTitle(selectedDay) {
+        // this.scheduleTitle.innerHTML = '';
+        let options = {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }
+        let locales = 'ru-RU';
+        this.scheduleTitle.innerHTML = new Date(selectedDay).toLocaleDateString(locales, options);
+    }
     selectedDayChanged(selectedDay, events) {
+        this.selectedDay = selectedDay;
         //TODO: написать логику отрисовки контрола для выбранного дня и списка событий этого дня
-
+        this.renderScheduleTitle(selectedDay);
+        console.dir(events);
     }
 
     addEvent() {
@@ -66,11 +80,12 @@ export default class Schedule {
 
         if (this.eventAdded)
             this.eventAdded(event);
+            this.closeAddEventDialog();
     }
 
 
     dateToLocal() {
-        const date = this.selectedDate ?? new Date();
+        const date = this.selectedDay;
         const dateLocalTimeToString = {
             date: date.getDate(),
             month: date.getMonth() + 1,
@@ -119,8 +134,7 @@ export default class Schedule {
 
     }
 
-    closeAddEventDialog(e) {
-        e.preventDefault();
+    closeAddEventDialog() {
         this.modal.classList.remove('modal-visible');
     }
 
