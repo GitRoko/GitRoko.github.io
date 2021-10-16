@@ -56,7 +56,7 @@ function onEventAdded(event) {
     //todo >> event
     localStorage.setItem(event.id.toString(), JSON.stringify(event));
 
-    schedule.selectedDayChanged(schedule.selectedDate, getEvents(schedule.selectedDate));
+    schedule.selectedDayChanged(schedule.selectedDay, getEvents(schedule.selectedDay));
 }
 
 function onValidateEvent(event) {
@@ -68,23 +68,23 @@ function onValidateEvent(event) {
     } else return false;
 }
 
-const selectedDate = new Date();
+const selectedDay = new Date();
 
 const calendar = new Calendar(
     document.querySelector('.cal'),
     [...MONTH_LIST],
     [...YEAR_LIST],
     onSelectedDayChanged,
-    selectedDate);
+    selectedDay);
 
 const schedule = new Schedule(
     document.querySelector('.schedule'),
-    getEvents(selectedDate),
+    getEvents(selectedDay),
     onEventAdded,
     undefined,
     undefined,
     onValidateEvent,
-    selectedDate);
+    selectedDay);
 
 const timeLine = new TimeLineInSchedule(document.querySelector('.schedule'));
 

@@ -64,8 +64,9 @@ export default class Schedule {
         console.dir(events);
     }
 
-    addEvent() {
+    addEvent(e) {
         //TODO: реализовать логику добавления события
+        e.preventDefault();
         const event = {
             id: this.dateToLocal('id'),
             title: this.titleEvent.value,
