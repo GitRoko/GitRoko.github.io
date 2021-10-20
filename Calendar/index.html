@@ -2,114 +2,116 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()"/>
-    <title>Calendar</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="timeLineInSchedule.js" type="module"></script>
-    <script src="schedule.js" type="module"></script>
-    <script src="calendar.js" type="module"></script>
-    <script src="app.js" type="module"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()"/>
+  <title>Calendar</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="timeLineInSchedule.js" type="module"></script>
+  <script src="schedule.js" type="module"></script>
+  <script src="calendar.js" type="module"></script>
+  <script src="app.js" type="module"></script>
 </head>
 
 <body>
 <div class="container">
-    <div class="schedule">
-        <div class="schedule-header">
-            <div class="schedule-title"></div>
-            <button class="btn-addEvent" type="button">+</button>
-        </div>
-        <ul class="schedule-timeBlocks">
-            <li class="timeline"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-            <li class="schedule-timeBlock"></li>
-        </ul>
+  <div class="schedule">
+    <div class="schedule-header">
+      <div class="schedule-title"></div>
+      <button class="btn-addEvent" type="button">+</button>
     </div>
-    <div class="cal">
-        <ul class="cal-header">
-            <li class="btn">
-                <button class="btn-prev">&#60</button>
-            </li>
-            <li class="cal-header-month">
-                <select class="select-month" name="month">
+    <ul class="schedule-timeBlocks">
 
-                </select>
-                </li>
-                <li class="cal-header-year">
-                    <select class="select-year" name="year">
+      <li class="timeline"></li>
+      <li class="schedule-timeBlock">
+      </li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+      <li class="schedule-timeBlock"></li>
+    </ul>
+  </div>
+  <div class="cal">
+    <ul class="cal-header">
+      <li class="btn">
+        <button class="btn-prev">&#60</button>
+      </li>
+      <li class="cal-header-month">
+        <select class="select-month" name="month">
 
-                    </select>
-                </li>
-                <li class="btn">
-                    <button class="btn-next">&#62</button>
-                </li>
-            </ul>
-            <ul class="cal-week-days">
-                <li class="cal-week-day">Пн</li>
-                <li class="cal-week-day">Вт</li>
-                <li class="cal-week-day">Ср</li>
-                <li class="cal-week-day">Чт</li>
-                <li class="cal-week-day">Пт</li>
-                <li class="cal-week-day">Сб</li>
-                <li class="cal-week-day">Вс</li>
-            </ul>
-            <ul class="cal-days">
+        </select>
+      </li>
+      <li class="cal-header-year">
+        <select class="select-year" name="year">
 
-            </ul>
+        </select>
+      </li>
+      <li class="btn">
+        <button class="btn-next">&#62</button>
+      </li>
+    </ul>
+    <ul class="cal-week-days">
+      <li class="cal-week-day">Пн</li>
+      <li class="cal-week-day">Вт</li>
+      <li class="cal-week-day">Ср</li>
+      <li class="cal-week-day">Чт</li>
+      <li class="cal-week-day">Пт</li>
+      <li class="cal-week-day">Сб</li>
+      <li class="cal-week-day">Вс</li>
+    </ul>
+    <ul class="cal-days">
+
+    </ul>
+  </div>
+</div>
+<div id="addEvent" class="modal">
+  <div class="modal__body">
+    <div class="modal__content">
+      <form action="" class="eventForm">
+        <div class="modal__header">
+          <h2>Событие</h2>
+          <a class="modal__close">+</a>
         </div>
-    </div>
-    <div id="addEvent" class="modal">
         <div class="modal__body">
-            <div class="modal__content">
-                <form action="" class="eventForm">
-                    <div class="modal__header">
-                        <h2>Событие</h2>
-                        <a href="" class="modal__close">+</a>
-                    </div>
-                    <div class="modal__body">
-                        <label for="titleEvent"></label>
-                        <input type="text" id="titleEvent" class="titleEvent" placeholder="Название">
-                       <div class="wrapStartEvent">
-                           <label for="dateStartEvent">Начало: </label>
-                           <input type="datetime-local" id="dateStartEvent" class="dateEvent" required>
-                       </div>
-                        <div class="wrapEndEvent">
-                            <label for="dateEndEvent">Конец: </label>
-                            <input type="datetime-local" id="dateEndEvent" class="dateEvent" required>
-                        </div>
-                    </div>
-                    <div class="modal__footer">
-                        <button class="eventForm__submit" type="submit">Добавить</button>
-                        <button class="eventForm__cancel" type="reset">Отмена</button>
-                    </div>
-                </form>
-            </div>
+          <label for="titleEvent"></label>
+          <input type="text" id="titleEvent" class="titleEvent" placeholder="Название">
+          <div class="wrapStartEvent">
+            <label for="dateStartEvent">Начало: </label>
+            <input type="datetime-local" id="dateStartEvent" class="dateEvent" required>
+          </div>
+          <div class="wrapEndEvent">
+            <label for="dateEndEvent">Конец: </label>
+            <input type="datetime-local" id="dateEndEvent" class="dateEvent" required>
+          </div>
         </div>
+        <div class="modal__footer">
+          <button class="eventForm__submit" type="submit">Добавить</button>
+          <button class="eventForm__cancel" type="reset">Отмена</button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
 </body>
 
 </html>
