@@ -4,7 +4,7 @@ export default class Schedule {
   //TODO: завести поля
   // selectedDay, events, onEventAdded,
   // onEventChanged, onEventDeleted, onValidateEvent
-  // в этом классе. Соответсвующие функции определить в app.js
+  // в этом классе. Соответствующие функции определить в app.js
   constructor(
     rootEl,
     events,
@@ -66,7 +66,7 @@ export default class Schedule {
 
     const heightParent = this.rootEl.querySelector('.schedule-timeBlocks').offsetHeight;
     const minutesPerDay = 1440;
-    document.querySelectorAll('.event').forEach(el =>el.remove());
+    document.querySelectorAll('.event').forEach(el => el.remove());
     events.forEach(function(event) {
       const eventParse = JSON.parse(event);
       const startDay = new Date(eventParse.startEvent).setHours(0, 0, 0, 0)
@@ -95,11 +95,12 @@ export default class Schedule {
     //TODO: реализовать логику добавления события
     e.preventDefault();
     const event = {
-      id: this.dateToLocal('id'),
       title: (this.titleEvent.value.length > 0) ? this.titleEvent.value : 'Event',
       // title: this.titleEvent.value,
       startEvent: this.startEvent.value,
       endEvent: this.endEvent.value,
+      id: new Date(this.startEvent.value).getTime(),
+      // id: this.dateToLocal('id'),
     };
 
     if (this.validateEvent && !this.validateEvent(event)) {
