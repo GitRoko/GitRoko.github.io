@@ -60,12 +60,10 @@ function onEventAdded(event) {
 }
 
 function onValidateEvent(event) {
-  if (typeof event.id === "number"
+  return typeof event.id === "number"
     && typeof event.title === "string"
     && typeof event.startEvent === "string"
-    && typeof event.endEvent === "string") {
-    return true;
-  } else return false;
+    && typeof event.endEvent === "string";
 }
 
 const selectedDay = new Date();

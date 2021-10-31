@@ -1,4 +1,4 @@
-import Calendar from "./calendar.js";
+// import Calendar from "./calendar.js";
 
 export default class Schedule {
   //TODO: завести поля
@@ -17,8 +17,8 @@ export default class Schedule {
     this.selectedDay = selectedDay;
     this.events = events;
     this.eventAdded = eventAdded;
-    this.eventChanged = eventChanged;
-    this.eventDeleted = eventDeleted;
+    // this.eventChanged = eventChanged;
+    // this.eventDeleted = eventDeleted;
     this.validateEvent = validateEvent;
 
     this.scheduleTitle = document.querySelector('.schedule-title');
@@ -38,7 +38,8 @@ export default class Schedule {
     this.btnAddEvent.addEventListener('click', this.showAddEventDialog.bind(this));
     this.btnCansel.addEventListener('click', this.cancelAddEventDialog.bind(this));
     this.formEvent.addEventListener('submit', this.addEvent.bind(this));
-    this.renderScheduleTitle(this.selectedDay);
+    this.renderScheduleTitle(selectedDay);
+    this.selectedDayChanged(selectedDay, events);
     this.init();
 
   }
@@ -56,6 +57,7 @@ export default class Schedule {
     let locales = 'ru-RU';
     this.scheduleTitle.innerHTML = new Date(selectedDay).toLocaleDateString(locales, options);
   }
+
   selectedDayChanged(selectedDay, events) {
     this.selectedDay = selectedDay;
     //TODO: написать логику отрисовки контрола для выбранного дня и списка событий этого дня
@@ -76,7 +78,6 @@ export default class Schedule {
       const diff2 = endEvent - startEvent;
       const msInSec = 1000;
       const secInMin = 60;
-
       const coordinatesStartEventEl = Math.round((heightParent / minutesPerDay) * Math.round(diff1 / msInSec / secInMin));
       const heightEventEl = Math.round((heightParent / minutesPerDay) * Math.round(diff2 / msInSec / secInMin));
       document.querySelector('.schedule-timeBlocks').insertAdjacentHTML("beforeend", `
@@ -86,16 +87,14 @@ export default class Schedule {
           <button class="event__btn event__btn-delete">Delete</button>
         </li>
       `);
-
     });
-
   }
 
   addEvent(e) {
     //TODO: реализовать логику добавления события
     e.preventDefault();
     const event = {
-      id: this.dateToLocal('id'),
+      id: new Date(this.startEvent.value).getTime(),
       title: (this.titleEvent.value.length > 0) ? this.titleEvent.value : 'Event',
       // title: this.titleEvent.value,
       startEvent: this.startEvent.value,
@@ -106,21 +105,19 @@ export default class Schedule {
       return;
     }
 
-
     if (this.eventAdded)
       this.eventAdded(event);
     this.closeAddEventDialog();
   }
 
-
-  dateToLocal() {
+  dateToLocal(str) {
     const date = this.selectedDay;
     const dateLocalTimeToString = {
       date: date.getDate(),
       month: date.getMonth() + 1,
       year: date.getFullYear(),
-      hours: date.getHours(),
-      minutes: date.getMinutes(),
+      hours: new Date().getHours(),
+      minutes: new Date().getMinutes(),
       makeDate: function () {
         return `${this.year.toString()}-${this.month.toString().padStart(2, "0")}-${this.date.toString().padStart(2, "0")}`
       },
@@ -135,11 +132,11 @@ export default class Schedule {
       },
     }
 
-    if (arguments[0] === 'start') {
+    if (str === 'start') {
       return dateLocalTimeToString.defaultStartTime();
-    } else if (arguments[0] === 'end') {
+    } else if (str === 'end') {
       return dateLocalTimeToString.defaultEndTime();
-    } else if (arguments[0] === 'id') {
+    } else if (str === 'id') {
       return dateLocalTimeToString.makeId();
     }
     return null;
@@ -160,8 +157,6 @@ export default class Schedule {
     this.titleEvent.value = '';
     this.startEvent.value = `${this.dateToLocal('start')}`;
     this.endEvent.value = `${this.dateToLocal('end')}`;
-
-
   }
 
   closeAddEventDialog() {
