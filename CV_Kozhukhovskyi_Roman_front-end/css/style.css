@@ -1,7 +1,8 @@
 body {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 .container {
     display: flex;
@@ -10,9 +11,18 @@ body {
     justify-content: flex-start;
     align-content: stretch;
     align-items: stretch;
+
+    max-width: 1024px;
+
+    margin: 0 auto;
 }
 .block {
     width: 50%;
+    margin-top: 15px;
+    padding-right: 25px;
+    margin-bottom: 0;
+    padding-left: 50px;
+    box-sizing: border-box;
 }
 h1 {
     font-size: 2em;
@@ -36,13 +46,91 @@ h3 {
     padding: 3px 0;
 }
 .about {
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: stretch;
+    padding-left: 0;
+}
+.about .about-header {
+    width: 50%;
 }
 .about .about-body {
+    width: 20%;
     align-self: flex-end;
 }
+.about .about-contact {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: stretch;
+}
+.about-contact .contact-list {
+    border-left: #000000 solid 1px;
+    margin-left: 5px;
+    list-style: none;
+}
+.contact-list-item .contact-tel,
+.contact-list-item .contact-email,
+{
+    position: relative;
+}
+{
+
+}
+.contact-list-item .contact-telegram{
+
+}
+.contact-list-item .contact-tel:before{
+    position: absolute;
+    content: '';
+    width: 25px;
+    height: 25px;
+    left: 0;
+    top: 0;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.block h2 {
+    position: relative;
+}
+.block h2:before {
+    content: "";
+    position: absolute;
+    left: -55px;
+    top: -10px;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.education-header:before {
+    background-image: url("../img/education.svg");
+}
+.skills-header:before {
+    background-image: url("../img/tools.svg");
+}
+.experience-header:before {
+    background-image: url("../img/work.svg");
+}
+.pet-projects-header:before {
+    background-image: url("../img/parallel-tasks.svg");
+}
+.courses-header:before {
+    background-image: url("../img/award-fill.svg");
+}
+.hobbies-header:before {
+    background-image: url("../img/face-like.svg");
+}
+
