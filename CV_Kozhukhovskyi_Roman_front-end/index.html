@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CV Kozhukhovskyi Roman front-end</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -16,8 +17,11 @@
                 <h1>Кожуховский Роман Александрович</h1>
                 <h3>trainee (junior) Front-end developer</h3>
                 <p class="about-info">
-                   <img class="icon-quotes" src="img/quotes.svg" alt="quotes icon">
-                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias aliquam, deleniti eius explicabo facere molestias natus perspiciatis praesentium repellendus! Cumque cupiditate officia possimus voluptate?
+                    <img class="icon-quotes" src="img/quotes.svg" alt="quotes icon">
+                    Привет! Я мечтаю стать частью Вашей крутой команды фронтендеров!
+                    Раньше я работал в барах и ресторанах.
+                    Сначала простым барменом, затем старшим барменом и вскоре бар-менеджером, где накопил богатый жизненный опыт и профессиональные навыки.
+                    Теперь я хочу заниматься фронтендом и обучаюсь как самостоятельно, так и на курсах.
                 </p>
             </div>
             <div class="about-body">
@@ -27,9 +31,15 @@
                 <h3 class="contact-header">Контакты</h3>
                 <div class="contact-body">
                     <ul class="contact-list">
-                        <li class="contact-list-item"><a class="contact-tel" href="tel:+380507633063">+380507633063</a></li>
-                        <li class="contact-list-item"><a class="contact-email" href="mailto:4kroman@gmail.com">4kroman@gmail.com</a></li>
-                        <li class="contact-list-item"><a class="contact-telegram" href="https://t.me/TKroman">TKroman</a></li>
+                        <li class="contact-list-item">
+                            <a class="contact-tel" href="tel:+380507633063">+380507633063</a>
+                        </li>
+                        <li class="contact-list-item">
+                            <a class="contact-email" href="mailto:4kroman@gmail.com">4kroman@gmail.com</a>
+                        </li>
+                        <li class="contact-list-item">
+                            <a class="contact-telegram" href="https://t.me/TKroman">TKroman</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -37,19 +47,23 @@
         <div class="block education">
             <h2 class="education-header">Образование</h2>
             <div class="education-body">
-                <ul class="education-list timeline">
-                    <li class="timeline-item">
-                        Донецкий Национальный Технический Университет
-                        Заочный, Экономика предприятия, Донецк
-                        Высшее, с 2004 по 2009 (5 лет)
+                <ul class="timeline">
+                    <li class="timeline-item" data-date="2004">
+                        <p>
+                            Донецкий Национальный Технический Университет.
+                            Заочный, Экономика предприятия, Донецк
+                            Высшее, (5 лет).
+                        </p>
                     </li>
-                    <li class="timeline-item">
-                        Техникум №107
-                        Программист младший специалист, Донецк
-                        Среднее специальное, с 1998 по 2002 (4 года)
-
-                        Изучал основы программирования, Basic, Pascal, Delphi, C++.
-                        Увлекся Web-ом во время учебы, писал сайт на HTML(2001 год) для госорганизации где проходил практику.
+                    <li class="timeline-item" data-date="1998">
+                        <p>
+                            Техникум №107.
+                            Программист младший специалист, Донецк
+                            Среднее специальное, (4 года).
+                        </p>
+                        <p>Изучал основы программирования, Basic, Pascal, Delphi, C++.
+                            Увлекся Web-ом во время учебы, писал сайт на HTML(2001 год) для госорганизации где проходил практику.
+                        </p>
                     </li>
                 </ul>
             </div>
@@ -57,51 +71,91 @@
         <div class="block skills">
             <h2 class="skills-header">Навыки</h2>
             <div class="skills-body">
-                HTML
-                CSS
-                JS
-                Фреймворк Bootstrap, разобрался с принципами работы фреймворков
-                Git
-                Photoshop/Figma/Avocode/Zeppelin
+                <ul class="skills-list">
+                    <li class="skills-list-item">
+                        <label for="skill-1">HTML:</label>
+                        <progress id="skill-1" value="75" max="100"> 75% </progress>
+                    </li>
+                    <li class="skills-list-item">
+                        <label for="skill-2">CSS:</label>
+                        <progress id="skill-2" value="70" max="100"> 70% </progress>
+                    </li>
+                    <li class="skills-list-item">
+                        <label for="skill-3">JS:</label>
+                        <progress id="skill-3" value="40" max="100"> 40% </progress>
+                    </li>
+                    <li class="skills-list-item">
+                        <label for="skill-4">Git:</label>
+                        <progress id="skill-4" value="55" max="100"> 55% </progress>
+                    </li>
+                    <li class="skills-list-item">
+                        <label for="skill-5">Photoshop/Figma/Avocode/Zeppelin:</label>
+                        <progress id="skill-5" value="70" max="100"> 80% </progress>
+                    </li>
+                    <li class="skills-list-item">
+                        <label for="skill-6">Bootstrap:</label>
+                        <progress id="skill-6" value="60" max="100"> 60% </progress>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="block experience">
             <h2 class="experience-header">Опыт работы</h2>
             <div class="experience-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, quos?
+                <ul class="timeline">
+                    <li class="timeline-item" data-date="2021">
+                        <p>Административный директор в частной клинике.</p>
+                    </li>
+                    <li class="timeline-item" data-date="2002">
+                        <p>Работал в барах и ресторанах.</p>
+                    </li>
+                    <li class="timeline-item" data-date="2000">
+                         <p>Оператор ЭВМ в ЦГБ №18. Работал с базами данных, делал сайт для больницы.</p>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="block pet-projects">
-            <h2 class="pet-projects-header">Lorem ipsum.</h2>
+            <h2 class="pet-projects-header">Мои проекты</h2>
             <div class="pet-projects-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, quos?
+                <p>
+                    Написал простую игру «Камень, ножницы бумага»:
+                    <a href="https://gitroko.github.io/RSP-game/">RSP-game</a>
+                </p>
+                <p>
+                    Сейчас пишу pet-project календарь с расписанием:
+                    <a href="https://gitroko.github.io/Calendar/">Calendar</a>
+                </p>
+                <p>
+                    Моё резюме:
+                    <a href="https://gitroko.github.io/CV_Kozhukhovskyi_Roman_front-end/">CV Kozhukhovskyi Roman front-end</a>
+                </p>
             </div>
-            Есть опыт верстки лендингов, небольших сайтов - нарезка макета, верстка, деплой. Написал простую игру «Камень, ножницы бумага»:
-            https://gitroko.github.io/RSP-game/
-
-            Сейчас пишу pet-project календарь с расписанием:
-            https://gitroko.github.io/Calendar/
         </div>
         <div class="block courses">
             <h2 class="courses-header">Дополнительные курсы</h2>
             <div class="courses-body">
                 <ul class="courses-list timeline">
-                    <li class="timeline-item">
-                        курсы Frontend developer (01.2016, 3 месяца)
+                    <li class="timeline-item" data-date="2016">
+                       <p>Курсы Frontend developer</p>
                     </li>
-                    <li class="timeline-item">
-                        Основы тестирования ПО (2018, 1 мес)
+                    <li class="timeline-item" data-date="2018">
+                        <p>Основы тестирования ПО</p>
                     </li>
-                    <li class="timeline-item">
-                        Web-academy, Frontend (2021, 3 месяца)
+                    <li class="timeline-item" data-date="2021">
+                        <p>Web-academy, Frontend</p>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="block hobbies">
-            <h2 class="hobbies-header">Lorem ipsum.</h2>
-            <div class="hobbies-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, quos?
+        <div class="block hobby">
+            <h2 class="hobby-header">Хобби и увлечения</h2>
+            <div class="hobby-body">
+              <ul class="hobby-list">
+                  <li class="hobby-list-item"><img src="img/hobby-foto.svg" alt="icon"></li>
+                  <li class="hobby-list-item"><img src="img/hobby-data.svg" alt="icon"></li>
+                  <li class="hobby-list-item"><img src="img/hobby-music.svg" alt="icon"></li>
+              </ul>
             </div>
         </div>
     </div>

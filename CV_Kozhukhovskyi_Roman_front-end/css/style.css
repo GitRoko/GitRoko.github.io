@@ -1,6 +1,6 @@
 body {
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
@@ -11,9 +11,7 @@ body {
     justify-content: flex-start;
     align-content: stretch;
     align-items: stretch;
-
     max-width: 1024px;
-
     margin: 0 auto;
 }
 .block {
@@ -26,24 +24,37 @@ body {
 }
 h1 {
     font-size: 2em;
-    font-weight: 500;
-
+    font-weight: 700;
+    margin: 10px 0;
     color: #2F80ED;
 }
 h3 {
     font-size: 1.2em;
     font-weight: 500;
+    margin: 10px 0;
 }
-
 .block h2 {
     text-transform: uppercase;
-
     font-size: 1.5em;
     font-weight: 700;
-
     border-top: #000000 solid 1px;
     border-bottom: #000000 solid 1px;
-    padding: 3px 0;
+    padding: 6px 0;
+}
+.block h2 {
+    position: relative;
+}
+.block h2:before {
+    content: "";
+    position: absolute;
+    left: -45px;
+    top: 0px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .about {
     width: 100%;
@@ -56,67 +67,119 @@ h3 {
     padding-left: 0;
 }
 .about .about-header {
-    width: 50%;
+    max-width: 40%;
+    margin-right: 15px;
+    order: 1;
+}
+.about-header .icon-quotes {
+    max-width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 8px;
+}
+.about-header .about-info {
+    font-size: 0.8em;
 }
 .about .about-body {
-    width: 20%;
-    align-self: flex-end;
+    max-width: 20%;
+    align-self: flex-start;
+    order: 2;
+}
+.about-body .photo {
+    max-width: 100%;
+    height: auto;
+    border: #2F80ED solid 1px;
+    border-radius: 5%;
 }
 .about .about-contact {
-    width: 30%;
+    width: 40%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: stretch;
     justify-content: center;
     align-items: stretch;
+    order: 3;
 }
 .about-contact .contact-list {
     border-left: #000000 solid 1px;
     margin-left: 5px;
     list-style: none;
 }
+.contact-list-item {
+    padding: 15px 10px;
+}
 .contact-list-item .contact-tel,
 .contact-list-item .contact-email,
-{
+.contact-list-item .contact-telegram {
     position: relative;
 }
-{
-
+a{
+    text-decoration: none;
+    color: #2D9CDB;
 }
-.contact-list-item .contact-telegram{
-
-}
-.contact-list-item .contact-tel:before{
+.contact-list-item a:before{
     position: absolute;
     content: '';
     width: 25px;
     height: 25px;
-    left: 0;
-    top: 0;
+    left: -35px;
+    top: -3px;
     display: block;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
 }
-.block h2 {
-    position: relative;
+.contact-list-item .contact-tel:before {
+    background-image: url("../img/phone.svg");
 }
-.block h2:before {
-    content: "";
-    position: absolute;
-    left: -55px;
-    top: -10px;
-    display: block;
-    width: 50px;
-    height: 50px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.contact-list-item .contact-email:before {
+    background-image: url("../img/email.svg");
+}
+.contact-list-item .contact-telegram:before {
+    background-image: url("../img/icon-telegram.svg");
 }
 .education-header:before {
     background-image: url("../img/education.svg");
+}
+.timeline {
+    border-left: 3px solid #42A5F5;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    color: #333;
+    position: relative;
+    padding: 20px 0 0 20px;
+    list-style: none;
+    text-align: left;
+}
+.timeline .timeline-item {
+    border-bottom: 1px solid rgba(160, 160, 160, 0.2);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.timeline .timeline-item:before,
+.timeline .timeline-item:after {
+    position: absolute;
+    display: block;
+    top: 0;
+}
+.timeline .timeline-item:before {
+    left: -70px;
+    color: #212121;
+    content: attr(data-date);
+    text-align: right;
+    font-size: 16px;
+}
+.timeline .timeline-item:after {
+    box-shadow: 0 0 0 3px #42a5f5;
+    left: -25px;
+    background: #212121;
+    border-radius: 50%;
+    height: 7px;
+    width: 7px;
+    content: "";
+    top: 5px;
 }
 .skills-header:before {
     background-image: url("../img/tools.svg");
@@ -130,7 +193,112 @@ h3 {
 .courses-header:before {
     background-image: url("../img/award-fill.svg");
 }
-.hobbies-header:before {
+.hobby-header:before {
     background-image: url("../img/face-like.svg");
+}
+.skills-list {
+    list-style: none;
+    padding-left: 10px;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+}
+.skills-list .skills-list-item {
+    position: relative;
+}
+.skills-list-item label{
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+::-webkit-progress-bar {
+    background: #fff;
+}
+::-webkit-progress-value {
+    background: #42a5f5;
+}
+::-moz-progress-bar {
+    background: #42a5f5;
+}
+progress {
+    display: block;
+    color: #42a5f5;
+    background: #fff;
+    border: 1px solid #42a5f5;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    margin: 5px;
+}
+.hobby-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 0;
+}
+.hobby-list-item {
+    border: 2px #2F80ED solid;
+    border-radius: 50%;
+    margin: 10px;
+}
+.hobby-list-item img{
+    display: block;
+    width: 50px;
+    max-width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .body {
+        font-size: 14px;
+    }
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .block {
+        width: 100%;
+    }
+    h1  {
+        font-size: 1.5em;
+    }
+    .about {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .about .about-header {
+        order: 3;
+        max-width: 100%;
+    }
+    .about .about-contact h3 {
+        display: none;
+    }
+    .about .about-body {
+        order: 1;
+        max-width: 45%;
+
+    }
+    .about-contact .contact-list {
+        border: none;
+        margin: 0;
+    }
+    .about .about-contact {
+        order: 2;
+        max-width: 50%;
+        font-size: 0.8em;
+    }
 }
 
