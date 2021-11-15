@@ -211,15 +211,7 @@ a{
     top: 5px;
     left: 10px;
 }
-::-webkit-progress-bar {
-    background: #fff;
-}
-::-webkit-progress-value {
-    background: #42a5f5;
-}
-::-moz-progress-bar {
-    background: #42a5f5;
-}
+
 progress {
     display: block;
     color: #42a5f5;
@@ -231,6 +223,17 @@ progress {
     width: 100%;
     height: 30px;
     margin: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+progress::-webkit-progress-bar {
+    background: #fff;
+}
+progress::-webkit-progress-value {
+    background: #42a5f5;
+}
+progress::-moz-progress-bar {
+    background: #42a5f5;
 }
 .hobby-list {
     list-style: none;
