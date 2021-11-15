@@ -1,3 +1,4 @@
+
 const progress = document.getElementsByTagName('PROGRESS');
 const arrValue = [];
 
